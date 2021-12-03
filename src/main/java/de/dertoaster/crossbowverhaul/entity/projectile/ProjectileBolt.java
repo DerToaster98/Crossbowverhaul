@@ -8,9 +8,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTier;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.world.Explosion.Mode;
 import net.minecraft.world.World;
 
 public class ProjectileBolt extends AbstractArrowEntity {
@@ -94,9 +97,31 @@ public class ProjectileBolt extends AbstractArrowEntity {
 	}
 	
 	@Override
+	protected void onHitBlock(BlockRayTraceResult rayTraceResult) {
+		super.onHitBlock(rayTraceResult);
+		
+		this.level.explode(this.getOwner(), rayTraceResult.getBlockPos().getX(), rayTraceResult.getBlockPos().getY(), rayTraceResult.getBlockPos().getZ(), 3.0F, Mode.DESTROY);
+		this.remove();
+	}
+	
+	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(ID_TIER, 2);
+	}
+	
+	@Override
+	public void addAdditionalSaveData(CompoundNBT nbt) {
+		super.addAdditionalSaveData(nbt);
+		
+		nbt.putString("bolt_tier", this.getTier().toString());
+	}
+	
+	@Override
+	public void readAdditionalSaveData(CompoundNBT nbt) {
+		super.readAdditionalSaveData(nbt);
+		
+		this.setTier(ItemTier.valueOf(nbt.getString("bolt_tier")));
 	}
 
 }
