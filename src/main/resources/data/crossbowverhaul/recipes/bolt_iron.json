@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+        "i ",
+		" f"
+    ],
+    "key":
+    {
+        "i":
+        {
+            "tag": "forge:ingots/iron"
+        },
+        "f":
+        {
+            "tag": "forge:feathers"
+        }
+    },
+    "result":
+    {
+        "item": "crossbowverhaul:bolt_iron",
+        "count": 4
+    }
+}

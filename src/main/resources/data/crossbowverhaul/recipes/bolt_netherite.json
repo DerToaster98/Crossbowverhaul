@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+		"item": "crossbowverhaul:bolt_diamond"
+	},
+    "addition": {
+		"tag": "forge:ingots/netherite"        
+    },
+    "result":
+    {
+        "item": "crossbowverhaul:bolt_netherite",
+        "count": 4
+    }
+}

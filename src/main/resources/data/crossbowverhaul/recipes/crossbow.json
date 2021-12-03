@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bii",
+    "ip ",
+    "i p"
+  ],
+  "key": {
+    "p": {
+      "tag": "minecraft:planks"
+    },
+    "i": {
+      "tag": "forge:ingots/iron"
+    },
+    "b": {
+      "item": "minecraft:bow"
+    }
+  },
+  "result": {
+    "item": "minecraft:crossbow",
+	"count": 1
+  }
+}

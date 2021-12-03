@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+        "i ",
+		" f"
+    ],
+    "key":
+    {
+        "i":
+        {
+            "tag": "forge:gems/diamond"
+        },
+        "f":
+        {
+            "tag": "forge:feathers"
+        }
+    },
+    "result":
+    {
+        "item": "crossbowverhaul:bolt_diamond",
+        "count": 4
+    }
+}
