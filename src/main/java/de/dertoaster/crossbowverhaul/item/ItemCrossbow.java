@@ -10,6 +10,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.monster.piglin.AbstractPiglinEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.CrossbowItem;
@@ -114,6 +115,9 @@ public class ItemCrossbow extends CrossbowItem implements IVanishable {
 		//!!This is needed to avoid the arrows glitching in !!
 		if(!PREDICATE_BOLTS.test(projectileItem)) {
 			projectileItem = new ItemStack(ModItems.ITEM_BOLT_IRON.get(), 1);
+		}
+		if(shooter instanceof AbstractPiglinEntity) {
+			projectileItem = new ItemStack(ModItems.ITEM_BOLT_GOLD.get(), 1);
 		}
 		if (projectileItem.isEmpty()) {
 			return false;
