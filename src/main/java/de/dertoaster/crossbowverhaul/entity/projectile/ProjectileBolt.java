@@ -2,6 +2,7 @@ package de.dertoaster.crossbowverhaul.entity.projectile;
 
 import javax.annotation.Nullable;
 
+import de.dertoaster.crossbowverhaul.init.ModEntityTypes;
 import de.dertoaster.crossbowverhaul.init.ModItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -26,12 +27,12 @@ public class ProjectileBolt extends AbstractArrowEntity {
 	}
 
 	public ProjectileBolt(World p_i46757_1_, double px, double py, double pz) {
-		super(EntityType.ARROW, px, py, pz, p_i46757_1_);
+		super(ModEntityTypes.BOLT.get(), px, py, pz, p_i46757_1_);
 		this.setBaseDamage(this.getBaseDamage());
 	}
 
 	public ProjectileBolt(World p_i46758_1_, LivingEntity shooter) {
-		super(EntityType.ARROW, shooter, p_i46758_1_);
+		super(ModEntityTypes.BOLT.get(), shooter, p_i46758_1_);
 		this.setBaseDamage(this.getBaseDamage());
 	}
 	
