@@ -1,0 +1,6 @@
+{
+    "parent": "crossbowverhaul:item/crossbow_netherite",
+    "textures": {
+        "layer0": "crossbowverhaul:item/crossbow_netherite_arrow"
+    }
+}
