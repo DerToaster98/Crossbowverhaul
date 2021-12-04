@@ -1,0 +1,38 @@
+{
+	"pools": [
+		{
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "crossbowverhaul:bolt_iron",
+					"weight": 1,
+					"functions": [
+						{
+							"function": "set_count",
+							"count": {
+								"min": 2,
+								"max": 5
+							}
+						}
+					],
+					"conditions": [
+						{
+							"condition": "minecraft:entity_properties",
+							"entity": "this",
+							"predicate": {
+								"mainhand": {
+									"item": "minecraft:crossbow"
+								}
+							}
+						},
+						{
+							"condition": "minecraft:random_chance",
+							"chance": 0.33
+						}
+					]
+				}
+			]
+		}
+	]
+}
