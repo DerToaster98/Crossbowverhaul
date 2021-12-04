@@ -28,69 +28,69 @@
     "overrides": [
         {
             "predicate": {
-                "pulling": 1
+                "crossbowverhaul:pulling": 1
             },
             "model": "crossbowverhaul:item/crossbow_netherite/crossbow_pulling_0"
         },
         {
             "predicate": {
-                "pulling": 1,
-                "pull": 0.58
+                "crossbowverhaul:pulling": 1,
+                "crossbowverhaul:pull": 0.58
             },
             "model": "crossbowverhaul:item/crossbow_netherite/crossbow_pulling_1"
         },
         {
             "predicate": {
-                "pulling": 1,
-                "pull": 1.0
+                "crossbowverhaul:pulling": 1,
+                "crossbowverhaul:pull": 1.0
             },
             "model": "crossbowverhaul:item/crossbow_netherite/crossbow_pulling_2"
         },
         {
             "predicate": {
-                "charged": 1
+                "crossbowverhaul:charged": 1
             },
             "model": "crossbowverhaul:item/crossbow_netherite/crossbow_arrow"
         },
 		{
             "predicate": {
-                "charged": 1,
-                "bolt_tier": -1
+                "crossbowverhaul:charged": 1,
+                "crossbowverhaul:bolt_tier": -1
             },
             "model": "crossbowverhaul:item/crossbow_netherite/crossbow_bolt_explosive"
         },
         {
             "predicate": {
-                "charged": 1,
-                "firework": 1
+                "crossbowverhaul:charged": 1,
+                "crossbowverhaul:firework": 1
             },
             "model": "crossbowverhaul:item/crossbow_netherite/crossbow_firework"
         },
 		{
             "predicate": {
-                "charged": 1,
-                "bolt_tier": 2
+                "crossbowverhaul:charged": 1,
+                "crossbowverhaul:bolt_tier": 2
             },
             "model": "crossbowverhaul:item/crossbow_netherite/crossbow_bolt_iron"
         },
 		{
             "predicate": {
-                "charged": 1,
-                "bolt_tier": 3
+                "crossbowverhaul:charged": 1,
+                "crossbowverhaul:bolt_tier": 3
             },
             "model": "crossbowverhaul:item/crossbow_netherite/crossbow_bolt_diamond"
         },
 		{
             "predicate": {
-                "charged": 1,
-                "bolt_tier": 4
+                "crossbowverhaul:charged": 1,
+                "crossbowverhaul:bolt_tier": 4
             },
             "model": "crossbowverhaul:item/crossbow_netherite/crossbow_bolt_gold"
         },
 		{
             "predicate": {
-                "charged": 1,
-                "bolt_tier": 5
+                "crossbowverhaul:charged": 1,
+                "crossbowverhaul:bolt_tier": 5
             },
             "model": "crossbowverhaul:item/crossbow_netherite/crossbow_bolt_netherite"
         }

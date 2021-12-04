@@ -62,28 +62,28 @@
 		{
             "predicate": {
                 "charged": 1,
-                "bolt_tier": 2
+                "crossbowverhaul:bolt_tier": 2
             },
             "model": "item/crossbow/crossbow_bolt_iron"
         },
 		{
             "predicate": {
                 "charged": 1,
-                "bolt_tier": 3
+                "crossbowverhaul:bolt_tier": 3
             },
             "model": "item/crossbow/crossbow_bolt_diamond"
         },
 		{
             "predicate": {
                 "charged": 1,
-                "bolt_tier": 4
+                "crossbowverhaul:bolt_tier": 4
             },
             "model": "item/crossbow/crossbow_bolt_gold"
         },
 		{
             "predicate": {
                 "charged": 1,
-                "bolt_tier": 5
+                "crossbowverhaul:bolt_tier": 5
             },
             "model": "item/crossbow/crossbow_bolt_netherite"
         }
