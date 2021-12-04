@@ -41,12 +41,13 @@ public class ItemCrossbow extends CrossbowItem implements IVanishable {
 		super(properties);
 	}
 
+	//TODO: Properly implement longer loading time => shorten the usedTicks in onUseTick and onReleaseUsing
 	@Override
 	public int getUseDuration(ItemStack item) {
 		// As wished by brass: 50% SLOWER loading time => x2
 		return 2 * super.getUseDuration(item);
 	}
-
+	
 	// Copied from vanilla cause for fucks sake methods are static -___-
 
 	@Override
