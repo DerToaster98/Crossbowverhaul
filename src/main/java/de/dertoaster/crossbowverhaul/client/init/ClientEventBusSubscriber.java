@@ -16,5 +16,6 @@ public class ClientEventBusSubscriber {
 	@SubscribeEvent
 	public static void onClientSetup(FMLClientSetupEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BOLT.get(), RenderProjectileBolt::new);
+		RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BOLT_EXPLOSIVE.get(), RenderProjectileBolt::new);
 	}
 }

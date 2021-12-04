@@ -2,6 +2,7 @@ package de.dertoaster.crossbowverhaul.client.renderer.entity;
 
 import de.dertoaster.crossbowverhaul.CrossbowverhaulMod;
 import de.dertoaster.crossbowverhaul.entity.projectile.ProjectileBolt;
+import de.dertoaster.crossbowverhaul.entity.projectile.ProjectileBoltExplosive;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
@@ -16,12 +17,17 @@ public class RenderProjectileBolt<T extends ProjectileBolt> extends ArrowRendere
 	private static final ResourceLocation TEXTURE_BOLT_DIAMOND = new ResourceLocation(CrossbowverhaulMod.MODID, "textures/entity/projectiles/bolt_diamond.png");
 	private static final ResourceLocation TEXTURE_BOLT_NETHERITE = new ResourceLocation(CrossbowverhaulMod.MODID, "textures/entity/projectiles/bolt_netherite.png");
 	
+	private static final ResourceLocation TEXTURE_BOLT_EXPLOSIVE = new ResourceLocation(CrossbowverhaulMod.MODID, "textures/entity/projectiles/bolt_netherite.png");
+	
 	public RenderProjectileBolt(EntityRendererManager renderManager) {
 		super(renderManager);
 	}
 
 	@Override
 	public ResourceLocation getTextureLocation(T boltEntity) {
+		if(boltEntity instanceof ProjectileBoltExplosive) {
+			return TEXTURE_BOLT_EXPLOSIVE;
+		}
 		switch(boltEntity.getTier()) {
 		case DIAMOND:
 			return TEXTURE_BOLT_DIAMOND;

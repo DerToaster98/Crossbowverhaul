@@ -27,13 +27,21 @@ public class ProjectileBolt extends AbstractArrowEntity {
 	}
 
 	public ProjectileBolt(World p_i46757_1_, double px, double py, double pz) {
-		super(ModEntityTypes.BOLT.get(), px, py, pz, p_i46757_1_);
+		this(ModEntityTypes.BOLT.get(), px, py, pz, p_i46757_1_);
 		this.setBaseDamage(this.getBaseDamage());
+	}
+	
+	protected ProjectileBolt(EntityType<? extends ProjectileBolt> type, double x, double y, double z, World w) {
+		super(type, x, y, z, w);
 	}
 
 	public ProjectileBolt(World p_i46758_1_, LivingEntity shooter) {
-		super(ModEntityTypes.BOLT.get(), shooter, p_i46758_1_);
+		this(ModEntityTypes.BOLT.get(), shooter, p_i46758_1_);
 		this.setBaseDamage(this.getBaseDamage());
+	}
+	
+	protected ProjectileBolt(EntityType<? extends ProjectileBolt> type, LivingEntity shooter, World world) {
+		super(type, shooter, world);
 	}
 	
 	public void setTier(ItemTier tier) {
