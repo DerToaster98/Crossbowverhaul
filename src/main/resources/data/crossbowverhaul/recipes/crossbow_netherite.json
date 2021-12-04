@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+		"item": "minecraft:crossbow"
+	},
+    "addition": {
+		"tag": "forge:ingots/netherite"        
+    },
+    "result":
+    {
+        "item": "crossbowverhaul:crossbow_netherite",
+        "count": 1
+    }
+}

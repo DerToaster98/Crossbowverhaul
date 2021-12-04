@@ -23,18 +23,18 @@ import net.minecraft.world.World;
 
 public class ItemCrossbow extends CrossbowItem implements IVanishable {
 
-	protected static final Predicate<ItemStack> PREDICATE_BOLTS = (itemstack) -> {
-		return itemstack.getItem() instanceof ItemBolt;
+	protected static final Predicate<ItemStack> PREDICATE_BOLTS_ONLY = (itemstack) -> {
+		return itemstack.getItem() instanceof ItemBolt && !(itemstack.getItem() instanceof ItemBoltExplosive);
 	};
 
 	@Override
 	public Predicate<ItemStack> getSupportedHeldProjectiles() {
-		return PREDICATE_BOLTS;
+		return PREDICATE_BOLTS_ONLY;
 	}
 
 	@Override
 	public Predicate<ItemStack> getAllSupportedProjectiles() {
-		return PREDICATE_BOLTS;
+		return PREDICATE_BOLTS_ONLY;
 	}
 
 	public ItemCrossbow(Properties properties) {
@@ -113,7 +113,7 @@ public class ItemCrossbow extends CrossbowItem implements IVanishable {
 
 	protected boolean loadProjectile(LivingEntity shooter, ItemStack weaponItem, ItemStack projectileItem, boolean forceCopyProjectileItem, boolean forceArrowSubTypeFlag) {
 		//!!This is needed to avoid the arrows glitching in !!
-		if(!PREDICATE_BOLTS.test(projectileItem)) {
+		if(!(this.getAllSupportedProjectiles().test(projectileItem) || this.getSupportedHeldProjectiles().test(projectileItem))) {
 			projectileItem = new ItemStack(ModItems.ITEM_BOLT_IRON.get(), 1);
 		}
 		if(shooter instanceof AbstractPiglinEntity) {

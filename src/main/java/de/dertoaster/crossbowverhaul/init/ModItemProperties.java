@@ -11,6 +11,14 @@ public class ModItemProperties {
 		ItemModelsProperties.register(ModItems.ITEM_CROSSBOW.get(), new ResourceLocation("bolt_tier"), (itemStack, clientWorld, itemHolder) -> {
 			return itemStack != null ? ItemCrossbow.getBoltTier(itemStack) : 0;
 		});
+		
+		//Netherite crossbow
+		ItemModelsProperties.register(ModItems.ITEM_CROSSBOW_NETHERITE.get(), new ResourceLocation("bolt_tier"), (itemStack, clientWorld, itemHolder) -> {
+			if(itemStack.getItem() == ModItems.ITEM_BOLT_EXPLOSIVE.get()) { 
+				return -1;
+			}
+			return itemStack != null ? ItemCrossbow.getBoltTier(itemStack) : 0;
+		});
 	}
 
 }
