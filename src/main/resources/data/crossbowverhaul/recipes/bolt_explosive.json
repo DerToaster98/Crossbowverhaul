@@ -1,0 +1,29 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+        " g ",
+		"pbp",
+		" g "
+    ],
+    "key":
+    {
+        "g":
+        {
+            "tag": "forge:gunpowder"
+        },
+        "p":
+        {
+            "item": "minecraft:blaze_powder"
+        },
+		"b":
+		{
+			"item": "crossbowverhaul:bolt_netherite"
+		}
+    },
+    "result":
+    {
+        "item": "crossbowverhaul:bolt_explosive",
+        "count": 1
+    }
+}
