@@ -42,6 +42,12 @@ public class ItemCrossbow extends CrossbowItem implements IVanishable {
 	}
 
 	//TODO: Properly implement longer loading time => shorten the usedTicks in onUseTick and onReleaseUsing
+	
+	//TODO: Mixin interface to CrossbowItem that has methods for the below stuff
+	//TODO: Add mixin / ASM that changes CrossbowItem.performShooting() to call a method from the item
+	//TODO: Add mixin / ASM that changes CrossbowItem.getChargeDuration() to call a method from the item
+	//TODO: Move CrossbowItem.shootProjectile() to Item
+	
 	@Override
 	public int getUseDuration(ItemStack item) {
 		// As wished by brass: 50% SLOWER loading time => x2
