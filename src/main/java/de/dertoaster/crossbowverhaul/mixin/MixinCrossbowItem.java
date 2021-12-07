@@ -64,7 +64,7 @@ public class MixinCrossbowItem {
 	
 	@Inject(
 		at = @At("HEAD"),
-		method = "shoot(Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;FZFFF)V",
+		method = "shootProjectile(Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;FZFFF)V",
 		cancellable = true
 	)
 	private static void shootProjectile(
@@ -78,7 +78,8 @@ public class MixinCrossbowItem {
 		float speed, 
 		float divergence, 
 		float simulated,
-		CallbackInfoReturnable<Void> cir
+		//For void types: Use CallbackInfo!!
+		CallbackInfo cir
 	) {
 		if(crossbow.getItem() instanceof IModifiedCrossbowMethod) {
 			((IModifiedCrossbowMethod)crossbow.getItem()).modifiedShootProjectile(world, shooter, handUsed, crossbow, projectileStack, shootSoundPitch, flagProjectileCantBePickedUp, speed, divergence, simulated);
