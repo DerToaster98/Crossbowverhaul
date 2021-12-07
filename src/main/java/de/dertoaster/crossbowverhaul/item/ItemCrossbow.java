@@ -56,23 +56,23 @@ public class ItemCrossbow extends CrossbowItem implements IVanishable, IModified
 
 	// Attention: this actually differs from vanilla!
 	protected boolean tryLoadProjectiles(LivingEntity shooter, ItemStack weaponItem) {
-		int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MULTISHOT, weaponItem);
-		int j = i == 0 ? 1 : 3;
+		int multishotEnchantLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MULTISHOT, weaponItem);
+		int actualShotCount = 1 + (2 * multishotEnchantLevel);
 		boolean flag = shooter instanceof PlayerEntity && ((PlayerEntity) shooter).abilities.instabuild;
 		ItemStack itemstack = shooter.getProjectile(weaponItem);
-		ItemStack itemstack1 = itemstack.copy();
+		ItemStack itemStackForAdditionalProjectiles = itemstack.copy();
 
-		for (int k = 0; k < j; ++k) {
-			if (k > 0) {
-				itemstack = itemstack1.copy();
+		for (int i = 0; i < actualShotCount; ++i) {
+			if (i > 0) {
+				itemstack = itemStackForAdditionalProjectiles.copy();
 			}
 
 			if (itemstack.isEmpty() && flag) {
 				itemstack = new ItemStack(ModItems.ITEM_BOLT_IRON.get(), 1);
-				itemstack1 = itemstack.copy();
+				itemStackForAdditionalProjectiles = itemstack.copy();
 			}
 
-			if (!this.loadProjectile(shooter, weaponItem, itemstack, k > 0, flag)) {
+			if (!this.loadProjectile(shooter, weaponItem, itemstack, i > 0, flag)) {
 				return false;
 			}
 		}
