@@ -28,6 +28,7 @@ public interface IModifiedCrossbowMethod {
 		 List<ItemStack> list = CrossbowItem.getChargedProjectiles(crossbow);
 	      float[] afloat = CrossbowItem.getShotPitches(shooter.getRandom());
 
+	      //TODO: Adjust to not be hardcoded to indexes
 	      for(int i = 0; i < list.size(); ++i) {
 	         ItemStack itemstack = list.get(i);
 	         boolean flag = shooter instanceof PlayerEntity && ((PlayerEntity)shooter).abilities.instabuild;
