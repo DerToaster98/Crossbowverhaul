@@ -70,8 +70,8 @@ public interface IModifiedCrossbowMethod {
 	            projectileentity.shoot((double)vector3f.x(), (double)vector3f.y(), (double)vector3f.z(), speed * this.getProjectileSpeedModifier(), divergence);
 	         }
 
-	         crossbow.hurtAndBreak(flag ? 3 : 1, shooter, (p_220017_1_) -> {
-	            p_220017_1_.broadcastBreakEvent(handUsed);
+	         crossbow.hurtAndBreak(flag ? 3 : 1, shooter, (shooterTmp) -> {
+	            shooterTmp.broadcastBreakEvent(handUsed);
 	         });
 	         world.addFreshEntity(projectileentity);
 	         world.playSound((PlayerEntity)null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.CROSSBOW_SHOOT, SoundCategory.PLAYERS, 1.0F, shootSoundPitch);
