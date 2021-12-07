@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "de.dertoaster.crossbowverhaul.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"refmap": "crossbowverhaul.refmap.json",
+	"mixins": [
+		"MixinCrossbowItem",
+		"CrossbowItemInvoker"
+	],
+	"minVersion": "0.8"
+}
