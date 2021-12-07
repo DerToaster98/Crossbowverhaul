@@ -30,13 +30,13 @@ public class ItemCrossbowNetherite extends ItemCrossbow implements IModifiedCros
 	}
 
 	@Override
-	public int getUseDuration(ItemStack item) {
-		return 2 * super.getUseDuration(item);
-	}
-
-	@Override
 	public int getDefaultProjectileRange() {
 		return 2 * super.getDefaultProjectileRange();
+	}
+	
+	@Override
+	public float getProjectileSpeedModifier() {
+		return 2 * super.getProjectileSpeedModifier();
 	}
 
 	// Override charging duration

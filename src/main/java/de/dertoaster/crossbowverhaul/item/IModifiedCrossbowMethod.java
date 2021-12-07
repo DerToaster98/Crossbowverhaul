@@ -67,7 +67,7 @@ public interface IModifiedCrossbowMethod {
 	            Vector3d vector3d = shooter.getViewVector(1.0F);
 	            Vector3f vector3f = new Vector3f(vector3d);
 	            vector3f.transform(quaternion);
-	            projectileentity.shoot((double)vector3f.x(), (double)vector3f.y(), (double)vector3f.z(), speed, divergence);
+	            projectileentity.shoot((double)vector3f.x(), (double)vector3f.y(), (double)vector3f.z(), speed * this.getProjectileSpeedModifier(), divergence);
 	         }
 
 	         crossbow.hurtAndBreak(flag ? 3 : 1, shooter, (p_220017_1_) -> {
@@ -89,5 +89,9 @@ public interface IModifiedCrossbowMethod {
 	
 	default int getChargeTimeReductionPerQuickChargeLevel() {
 		return 5;
+	}
+	
+	default float getProjectileSpeedModifier() {
+		return 1.0F;
 	}
 }
