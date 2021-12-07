@@ -38,12 +38,10 @@ public class ItemCrossbow extends CrossbowItem implements IVanishable, IModified
 		super(properties);
 	}
 
-	//TODO: Properly implement longer loading time => shorten the usedTicks in onUseTick and onReleaseUsing
-	
-	//TODO: Mixin interface to CrossbowItem that has methods for the below stuff
-	//TODO: Add mixin / ASM that changes CrossbowItem.performShooting() to call a method from the item
-	//TODO: Add mixin / ASM that changes CrossbowItem.getChargeDuration() to call a method from the item
-	//TODO: Move CrossbowItem.shootProjectile() to Item
+	//DONE: Mixin interface to CrossbowItem that has methods for the below stuff
+	//DONE: Add mixin / ASM that changes CrossbowItem.performShooting() to call a method from the item
+	//DONE: Add mixin / ASM that changes CrossbowItem.getChargeDuration() to call a method from the item
+	//DONE: Move CrossbowItem.shootProjectile() to Item
 	
 	@Override
 	public void releaseUsing(ItemStack weaponItem, World world, LivingEntity shooter, int useDuration) {
