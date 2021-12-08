@@ -24,26 +24,31 @@ import net.minecraft.world.World;
 
 public interface IModifiedCrossbowMethod {
 	
+	public default float getMultiShotAngle() {
+		//Default value is 10 degrees resulting in a opening angle of 20 degrees
+		return 22.5F;
+	}
+	
 	public default void modifiedPerformShooting(World world, LivingEntity shooter, Hand handUsed, ItemStack crossbow, float speed, float divergence) {
 		 List<ItemStack> list = CrossbowItem.getChargedProjectiles(crossbow);
-	      float[] afloat = CrossbowItem.getShotPitches(shooter.getRandom());
+	      	float[] afloat = CrossbowItem.getShotPitches(shooter.getRandom());
 
-	      //TODO: Adjust to not be hardcoded to indexes
-	      for(int i = 0; i < list.size(); ++i) {
-	         ItemStack itemstack = list.get(i);
-	         boolean flag = shooter instanceof PlayerEntity && ((PlayerEntity)shooter).abilities.instabuild;
-	         if (!itemstack.isEmpty()) {
-	            if (i == 0) {
-	            	CrossbowItemInvoker.invokeShootProjectile(world, shooter, handUsed, crossbow, itemstack, afloat[i], flag, speed, divergence, 0.0F);
-	            } else if (i == 1) {
-	            	CrossbowItemInvoker.invokeShootProjectile(world, shooter, handUsed, crossbow, itemstack, afloat[i], flag, speed, divergence, -10.0F);
-	            } else if (i == 2) {
-	            	CrossbowItemInvoker.invokeShootProjectile(world, shooter, handUsed, crossbow, itemstack, afloat[i], flag, speed, divergence, 10.0F);
-	            }
-	         }
-	      }
-
-	      CrossbowItemInvoker.invokeOnCrossbowShot(world, shooter, crossbow);
+	      	//DONE: Adjust to not be hardcoded to indexes
+		//TODO: Check if the implemenation of getShotPitches() works for us => adjust it: 0 is no longer the central projectile but rather the most left projectile!!
+		
+		//Multishot defines additional projectiles per side
+		final float anglePerIteration = this.getMultiShotAngle() / ((float)(list.size() -1) / 2.0F); //Divide by the multishot level: 
+		float currentAngle = -this.getMultiShotAngle();
+		
+	     	for(int i = 0; i < list.size(); ++i) {
+	       		ItemStack itemstack = list.get(i);
+	         	boolean flag = shooter instanceof PlayerEntity && ((PlayerEntity)shooter).abilities.instabuild;
+	         	if (!itemstack.isEmpty()) {
+				CrossbowItemInvoker.invokeShootProjectile(world, shooter, handUsed, crossbow, itemstack, afloat[i], flag, speed, divergence, currentAngle);
+	       	  	}
+	      		currentAngle += anglePerIteration;
+	      	}
+		CrossbowItemInvoker.invokeOnCrossbowShot(world, shooter, crossbow);
 	}
 	
 	public default void modifiedShootProjectile(World world, LivingEntity shooter, Hand handUsed, ItemStack crossbow, ItemStack projectileStack, float shootSoundPitch, boolean flagProjectileCantBePickedUp, float speed, float divergence, float simulated) {
