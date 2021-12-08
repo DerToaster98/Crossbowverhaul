@@ -119,6 +119,18 @@ public class ItemCrossbow extends CrossbowItem implements IVanishable, IModified
 		return 0;
 	}
 	
+	public static ItemStack getFirstLoadedBolt(ItemStack crossbow) {
+		List<ItemStack> loadedProjectiles = getChargedProjectiles(crossbow);
+		if(loadedProjectiles != null && !loadedProjectiles.isEmpty()) {
+			for(ItemStack stack : loadedProjectiles) {
+				if(stack.getItem() instanceof ItemBolt) {
+					return stack;
+				}
+			}
+		}
+		return ItemStack.EMPTY;
+	}
+	
 	//Override charging duration
 	@Override
 	public int getMaxChargeTime() {

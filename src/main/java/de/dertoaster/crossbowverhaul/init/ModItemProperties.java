@@ -1,9 +1,11 @@
 package de.dertoaster.crossbowverhaul.init;
 
 import de.dertoaster.crossbowverhaul.CrossbowverhaulMod;
+import de.dertoaster.crossbowverhaul.item.ItemBoltExplosive;
 import de.dertoaster.crossbowverhaul.item.ItemCrossbow;
 import de.dertoaster.crossbowverhaul.item.ItemCrossbowNetherite;
 import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.item.ItemTier;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 
@@ -12,13 +14,16 @@ public class ModItemProperties {
 	public static void register() {
 		// And finally, register the model predicates for the crossbow...
 		ItemModelsProperties.register(ModItems.ITEM_CROSSBOW.get(), new ResourceLocation(CrossbowverhaulMod.MODID, "bolt_tier"), (itemStack, clientWorld, itemHolder) -> {
+			if(ItemCrossbow.getFirstLoadedBolt(itemStack).getItem() instanceof ItemBoltExplosive) { 
+				return ItemTier.values().length;
+			}
 			return itemStack != null ? ItemCrossbow.getBoltTier(itemStack) : 0;
 		});
 		
 		//Netherite crossbow
 		ItemModelsProperties.register(ModItems.ITEM_CROSSBOW_NETHERITE.get(), new ResourceLocation(CrossbowverhaulMod.MODID, "bolt_tier"), (itemStack, clientWorld, itemHolder) -> {
-			if(itemStack.getItem() == ModItems.ITEM_BOLT_EXPLOSIVE.get()) { 
-				return 999;
+			if(ItemCrossbow.getFirstLoadedBolt(itemStack).getItem() instanceof ItemBoltExplosive) { 
+				return ItemTier.values().length;
 			}
 			return itemStack != null ? ItemCrossbow.getBoltTier(itemStack) : 0;
 		});
