@@ -4,8 +4,7 @@
 	"compatibilityLevel": "JAVA_8",
 	"refmap": "crossbowverhaul.refmap.json",
 	"mixins": [
-		"MixinCrossbowItem",
-		"CrossbowItemInvoker"
+		"MixinCrossbowItem"
 	],
 	"minVersion": "0.8"
 }
