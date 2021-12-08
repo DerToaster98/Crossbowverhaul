@@ -52,13 +52,6 @@
             },
             "model": "crossbowverhaul:item/crossbow_netherite/crossbow_arrow"
         },
-		{
-            "predicate": {
-                "crossbowverhaul:charged": 1,
-                "crossbowverhaul:bolt_tier": -1
-            },
-            "model": "crossbowverhaul:item/crossbow_netherite/crossbow_bolt_explosive"
-        },
         {
             "predicate": {
                 "crossbowverhaul:charged": 1,
@@ -93,6 +86,13 @@
                 "crossbowverhaul:bolt_tier": 5
             },
             "model": "crossbowverhaul:item/crossbow_netherite/crossbow_bolt_netherite"
+        },
+		{
+            "predicate": {
+                "crossbowverhaul:charged": 1,
+                "crossbowverhaul:bolt_tier": 999
+            },
+            "model": "crossbowverhaul:item/crossbow_netherite/crossbow_bolt_explosive"
         }
     ]
 }

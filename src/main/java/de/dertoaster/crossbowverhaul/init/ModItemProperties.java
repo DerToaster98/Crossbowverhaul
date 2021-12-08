@@ -18,7 +18,7 @@ public class ModItemProperties {
 		//Netherite crossbow
 		ItemModelsProperties.register(ModItems.ITEM_CROSSBOW_NETHERITE.get(), new ResourceLocation(CrossbowverhaulMod.MODID, "bolt_tier"), (itemStack, clientWorld, itemHolder) -> {
 			if(itemStack.getItem() == ModItems.ITEM_BOLT_EXPLOSIVE.get()) { 
-				return -1;
+				return 999;
 			}
 			return itemStack != null ? ItemCrossbow.getBoltTier(itemStack) : 0;
 		});
