@@ -3,6 +3,7 @@ package de.dertoaster.crossbowverhaul;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import de.dertoaster.crossbowverhaul.init.ModEnchantments;
 import de.dertoaster.crossbowverhaul.init.ModEntityTypes;
 import de.dertoaster.crossbowverhaul.init.ModItemProperties;
 import de.dertoaster.crossbowverhaul.init.ModItems;
@@ -30,6 +31,8 @@ public class CrossbowverhaulMod
     	ModItems.registerToEventBus(modbus);
     	//Register entities
     	ModEntityTypes.ENTITY_TYPES.register(modbus);
+    	//Register enchantment overrides
+    	ModEnchantments.registerToEventBus(modbus);
     }
     
     @SubscribeEvent
