@@ -30,8 +30,8 @@ public interface IModifiedCrossbowMethod {
 	}
 
 	public default float[] modifiedGetShotPitches(Random rnd, final int multiShotLevel) {
-		if(multiShotLevel <= 0) {
-			return new float[] {1.0F};
+		if (multiShotLevel <= 0) {
+			return new float[] { 1.0F };
 		}
 		float[] result = new float[multiShotLevel * 2 + 1];
 
@@ -48,21 +48,28 @@ public interface IModifiedCrossbowMethod {
 	public default void modifiedPerformShooting(World world, LivingEntity shooter, Hand handUsed, ItemStack crossbow, float speed, float divergence) {
 		List<ItemStack> list = CrossbowItem.getChargedProjectiles(crossbow);
 		final int msLevel = (list.size() - 1) / 2;
-		float[] afloat = this.modifiedGetShotPitches(shooter.getRandom(), msLevel);
+		final boolean creativeModeFlag = shooter instanceof PlayerEntity && ((PlayerEntity) shooter).abilities.instabuild;
 
-		// DONE: Adjust to not be hardcoded to indexes
+		if (msLevel <= 0) {
+			CrossbowItem.shootProjectile(world, shooter, handUsed, crossbow, list.get(0), 1.0F, creativeModeFlag, speed, divergence, 0.0F);
+		} else {
 
-		// Multishot defines additional projectiles per side
-		final float anglePerIteration = this.getMultiShotAngle() / ((float) msLevel); // Divide by the multishot level:
-		float currentAngle = -this.getMultiShotAngle();
+			float[] afloat = this.modifiedGetShotPitches(shooter.getRandom(), msLevel);
 
-		for (int i = 0; i < list.size(); ++i) {
-			ItemStack itemstack = list.get(i);
-			boolean flag = shooter instanceof PlayerEntity && ((PlayerEntity) shooter).abilities.instabuild;
-			if (!itemstack.isEmpty()) {
-				CrossbowItem.shootProjectile(world, shooter, handUsed, crossbow, itemstack, afloat[i], flag, speed, divergence, currentAngle);
+			// DONE: Adjust to not be hardcoded to indexes
+
+			// Multishot defines additional projectiles per side
+			final float anglePerIteration = this.getMultiShotAngle() / ((float) msLevel); // Divide by the multishot level:
+			float currentAngle = -this.getMultiShotAngle();
+
+			for (int i = 0; i < list.size(); ++i) {
+				ItemStack itemstack = list.get(i);
+
+				if (!itemstack.isEmpty()) {
+					CrossbowItem.shootProjectile(world, shooter, handUsed, crossbow, itemstack, afloat[i], creativeModeFlag, speed, divergence, currentAngle);
+				}
+				currentAngle += anglePerIteration;
 			}
-			currentAngle += anglePerIteration;
 		}
 		CrossbowItem.onCrossbowShot(world, shooter, crossbow);
 	}
