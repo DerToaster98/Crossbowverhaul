@@ -30,6 +30,9 @@ public interface IModifiedCrossbowMethod {
 	}
 
 	public default float[] modifiedGetShotPitches(Random rnd, final int multiShotLevel) {
+		if(multiShotLevel <= 0) {
+			return new float[] {1.0F};
+		}
 		float[] result = new float[multiShotLevel * 2 + 1];
 
 		for (int i = 0; i < multiShotLevel; i++) {
