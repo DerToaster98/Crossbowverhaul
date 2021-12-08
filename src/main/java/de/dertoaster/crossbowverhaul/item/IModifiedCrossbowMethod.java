@@ -1,6 +1,7 @@
 package de.dertoaster.crossbowverhaul.item;
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -28,15 +29,28 @@ public interface IModifiedCrossbowMethod {
 		return 22.5F;
 	}
 	
+	public default float[] modifiedGetShotPitches(Random rnd, final int multiShotLevel) {
+		float[] result = new float[multiShotLevel * 2 +1];
+		
+		for(int i = 0; i < multiShotLevel; i++) {
+			boolean currentFlag = rnd.nextBoolean();
+			result[i] = CrossbowItem.getRandomShotPitch(currentFlag);
+			result[result.length - (i + 1)] = CrossbowItem.getRandomShotPitch(!currentFlag);
+		}
+		result[multiShotLevel] = 1.0F;
+		
+		return result;
+	}
+	
 	public default void modifiedPerformShooting(World world, LivingEntity shooter, Hand handUsed, ItemStack crossbow, float speed, float divergence) {
 		 List<ItemStack> list = CrossbowItem.getChargedProjectiles(crossbow);
-	      	float[] afloat = CrossbowItem.getShotPitches(shooter.getRandom());
+		 final int msLevel = (list.size() -1) / 2;
+	      	float[] afloat = this.modifiedGetShotPitches(shooter.getRandom(), msLevel);
 
 	      	//DONE: Adjust to not be hardcoded to indexes
-		//TODO: Check if the implemenation of getShotPitches() works for us => adjust it: 0 is no longer the central projectile but rather the most left projectile!!
 		
 		//Multishot defines additional projectiles per side
-		final float anglePerIteration = this.getMultiShotAngle() / ((float)(list.size() -1) / 2.0F); //Divide by the multishot level: 
+		final float anglePerIteration = this.getMultiShotAngle() / ((float)msLevel); //Divide by the multishot level: 
 		float currentAngle = -this.getMultiShotAngle();
 		
 	     	for(int i = 0; i < list.size(); ++i) {
