@@ -118,7 +118,7 @@ public interface IModifiedCrossbowMethod {
 	}
 
 	default int getChargeTimeReductionPerQuickChargeLevel() {
-		return 5;
+		return this.getMaxChargeTime() / 5;
 	}
 
 	default float getProjectileSpeedModifier() {
