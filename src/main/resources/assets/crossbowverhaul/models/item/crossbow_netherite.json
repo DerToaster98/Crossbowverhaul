@@ -90,7 +90,7 @@
 		{
             "predicate": {
                 "crossbowverhaul:charged": 1,
-                "crossbowverhaul:bolt_tier": 999
+                "crossbowverhaul:bolt_tier": 6
             },
             "model": "crossbowverhaul:item/crossbow_netherite/crossbow_bolt_explosive"
         }
