@@ -1,6 +1,6 @@
 {
     "parent": "crossbowverhaul:item/crossbow_netherite",
     "textures": {
-        "layer0": "crossbowverhaul:item/crossbow_netherite_loaded_netherite"
+        "layer0": "crossbowverhaul:item/crossbow_netherite_loaded_explosive"
     }
 }

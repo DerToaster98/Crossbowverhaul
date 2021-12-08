@@ -17,7 +17,7 @@ public class RenderProjectileBolt<T extends ProjectileBolt> extends ArrowRendere
 	private static final ResourceLocation TEXTURE_BOLT_DIAMOND = new ResourceLocation(CrossbowverhaulMod.MODID, "textures/entity/projectiles/bolt_diamond.png");
 	private static final ResourceLocation TEXTURE_BOLT_NETHERITE = new ResourceLocation(CrossbowverhaulMod.MODID, "textures/entity/projectiles/bolt_netherite.png");
 	
-	private static final ResourceLocation TEXTURE_BOLT_EXPLOSIVE = new ResourceLocation(CrossbowverhaulMod.MODID, "textures/entity/projectiles/bolt_netherite.png");
+	private static final ResourceLocation TEXTURE_BOLT_EXPLOSIVE = new ResourceLocation(CrossbowverhaulMod.MODID, "textures/entity/projectiles/bolt_explosive.png");
 	
 	public RenderProjectileBolt(EntityRendererManager renderManager) {
 		super(renderManager);
