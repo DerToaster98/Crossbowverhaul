@@ -7,22 +7,13 @@ import net.minecraft.item.Items;
 
 public class ItemCrossbowNetherite extends ItemCrossbow implements IModifiedCrossbowMethod {
 
-	protected static final Predicate<ItemStack> PREDICATE_BOLTS = (itemstack) -> {
-		return itemstack.getItem() instanceof ItemBolt;
-	};
-
-	protected static final Predicate<ItemStack> PREDICATE_BOLTS_OR_FIREWORK = PREDICATE_BOLTS.or((itemStack) -> {
+	protected static final Predicate<ItemStack> PREDICATE_BOLTS_OR_FIREWORK = PREDICATE_BOLTS_ONLY.or((itemStack) -> {
 		return itemStack.getItem() == Items.FIREWORK_ROCKET;
 	});
 
 	@Override
 	public Predicate<ItemStack> getSupportedHeldProjectiles() {
 		return PREDICATE_BOLTS_OR_FIREWORK;
-	}
-
-	@Override
-	public Predicate<ItemStack> getAllSupportedProjectiles() {
-		return PREDICATE_BOLTS;
 	}
 
 	public ItemCrossbowNetherite(Properties properties) {
