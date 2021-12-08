@@ -2,7 +2,6 @@ package de.dertoaster.crossbowverhaul.item;
 
 import java.util.List;
 
-import de.dertoaster.crossbowverhaul.mixin.CrossbowItemInvoker;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.ICrossbowUser;
@@ -44,11 +43,11 @@ public interface IModifiedCrossbowMethod {
 	       		ItemStack itemstack = list.get(i);
 	         	boolean flag = shooter instanceof PlayerEntity && ((PlayerEntity)shooter).abilities.instabuild;
 	         	if (!itemstack.isEmpty()) {
-				CrossbowItemInvoker.invokeShootProjectile(world, shooter, handUsed, crossbow, itemstack, afloat[i], flag, speed, divergence, currentAngle);
+				CrossbowItem.shootProjectile(world, shooter, handUsed, crossbow, itemstack, afloat[i], flag, speed, divergence, currentAngle);
 	       	  	}
 	      		currentAngle += anglePerIteration;
 	      	}
-		CrossbowItemInvoker.invokeOnCrossbowShot(world, shooter, crossbow);
+	     	CrossbowItem.onCrossbowShot(world, shooter, crossbow);
 	}
 	
 	public default void modifiedShootProjectile(World world, LivingEntity shooter, Hand handUsed, ItemStack crossbow, ItemStack projectileStack, float shootSoundPitch, boolean flagProjectileCantBePickedUp, float speed, float divergence, float simulated) {

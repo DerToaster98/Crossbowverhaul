@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import de.dertoaster.crossbowverhaul.init.ModItems;
-import de.dertoaster.crossbowverhaul.mixin.CrossbowItemInvoker;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.IVanishable;
@@ -102,7 +101,7 @@ public class ItemCrossbow extends CrossbowItem implements IVanishable, IModified
 				itemstack = projectileItem.copy();
 			}
 
-			CrossbowItemInvoker.invokeAddChargedProjectile(weaponItem, itemstack);
+			CrossbowItem.addChargedProjectile(weaponItem, itemstack);
 			return true;
 		}
 	}
