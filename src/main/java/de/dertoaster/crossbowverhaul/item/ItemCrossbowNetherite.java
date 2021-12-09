@@ -15,6 +15,11 @@ public class ItemCrossbowNetherite extends ItemCrossbow implements IModifiedCros
 	public Predicate<ItemStack> getSupportedHeldProjectiles() {
 		return PREDICATE_BOLTS_OR_FIREWORK;
 	}
+	
+	@Override
+	public Predicate<ItemStack> getAllSupportedProjectiles() {
+		return PREDICATE_BOLTS_ONLY;
+	}
 
 	public ItemCrossbowNetherite(Properties properties) {
 		super(properties);

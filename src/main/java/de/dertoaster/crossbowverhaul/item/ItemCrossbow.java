@@ -3,8 +3,6 @@ package de.dertoaster.crossbowverhaul.item;
 import java.util.List;
 import java.util.function.Predicate;
 
-import com.google.common.base.Predicates;
-
 import de.dertoaster.crossbowverhaul.init.ModItems;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -22,19 +20,23 @@ import net.minecraft.world.World;
 public class ItemCrossbow extends CrossbowItem implements IVanishable, IModifiedCrossbowMethod {
 
 	protected static final Predicate<ItemStack> PREDICATE_BOLTS_ONLY = (itemstack) -> {
+		return itemstack.getItem() instanceof ItemBolt;
+	};
+	
+	protected static final Predicate<ItemStack> PREDICATE_BOLTS_ONLY_NO_EXPLOSIVE = (itemstack) -> {
 		return itemstack.getItem() instanceof ItemBolt && !(itemstack.getItem() instanceof ItemBoltExplosive);
 	};
 
 	//This only checks the items in off and main hand
 	@Override
 	public Predicate<ItemStack> getSupportedHeldProjectiles() {
-		return PREDICATE_BOLTS_ONLY;
+		return PREDICATE_BOLTS_ONLY_NO_EXPLOSIVE;
 	}
 
 	//Checks for all projectiles in the inventory
 	@Override
 	public Predicate<ItemStack> getAllSupportedProjectiles() {
-		return Predicates.alwaysFalse();
+		return PREDICATE_BOLTS_ONLY_NO_EXPLOSIVE;
 	}
 
 	public ItemCrossbow(Properties properties) {
