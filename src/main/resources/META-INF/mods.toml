@@ -45,3 +45,7 @@ This is a replacer for the vanilla crossbow
     versionRange="[1.16.5,1.17)"
     ordering="AFTER"
     side="BOTH"
+[[dependencies.crossbowverhaul]]
+    modId="mixinbootstrap"
+	mandatory=true
+	side="BOTH"
