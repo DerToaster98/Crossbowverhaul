@@ -58,7 +58,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                crossbowverhaul {
                     source sourceSets.main
                 }
             }
@@ -66,7 +66,7 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-
+            arg "-mixin.config=crossbowverhaul.mixins.json"
             // Recommended logging data for a userdev environment
             // The markers can be changed as needed.
             // "SCAN": For mods scan.
@@ -80,7 +80,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                crossbowverhaul {
                     source sourceSets.main
                 }
             }
@@ -105,7 +105,7 @@ minecraft {
             args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
-                examplemod {
+                crossbowverhaul {
                     source sourceSets.main
                 }
             }
@@ -145,6 +145,46 @@ dependencies {
 
 mixin {
     add sourceSets.main, "crossbowverhaul.refmap.json"
+}
+
+// Generate a fixed tsrg file after generating the default tsrg file
+createMcpToSrg {
+    outputs.upToDateWhen {false}
+    doLast {
+        fixFG5TsrgForMixinAP(output.get().asFile, file("${buildDir}/fixMcpToSrg/output.tsrg"))
+    }
+}
+
+// Tell mixin to use the fixed TSRG file
+mixin {
+    reobfSrgFile = file("${buildDir}/fixMcpToSrg/output.tsrg")
+}
+
+// Function that actually fixes the TSRG file
+static def fixFG5TsrgForMixinAP(File inFile, File outFile) {
+    // Make directory if needed
+    outFile.parentFile.mkdirs()
+
+    try (Scanner scanner = new Scanner(inFile); PrintWriter out = new PrintWriter(outFile)) {
+        boolean firstLine = true
+        while (scanner.hasNextLine()) {
+            String next = scanner.nextLine()
+
+            // Skip first 'tsrg left right' header line
+            if (firstLine) {
+                firstLine = false
+                continue
+            }
+
+            // Skip 'static' indicators
+            if (next.trim() == "static") {
+                continue
+            }
+
+            // Export line otherwise
+            out.println(next)
+        }
+    }
 }
 
 
