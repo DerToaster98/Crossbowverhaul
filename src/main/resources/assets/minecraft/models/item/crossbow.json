@@ -1,4 +1,5 @@
 {
+	"replace": true,
     "parent": "item/generated",
     "textures": {
         "layer0": "item/crossbow_standby"
