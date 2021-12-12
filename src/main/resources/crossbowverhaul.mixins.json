@@ -6,5 +6,8 @@
 	"mixins": [
 		"MixinCrossbowItem"
 	],
+	"client": [
+		"MixinItemInHandRenderer"
+    ],
 	"minVersion": "0.8"
 }
