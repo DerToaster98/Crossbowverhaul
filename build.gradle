@@ -6,7 +6,7 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-		classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+		classpath "org.spongepowered:mixingradle:${mixingradle_version}"
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -140,7 +140,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 	
-	annotationProcessor 'org.spongepowered:mixin:0.8:processor'
+	annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 }
 
 mixin {
