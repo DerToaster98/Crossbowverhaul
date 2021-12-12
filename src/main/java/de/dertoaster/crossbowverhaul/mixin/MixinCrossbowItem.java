@@ -26,7 +26,7 @@ public class MixinCrossbowItem {
 	 */
 	@Inject(
 		at = @At("HEAD"), 
-		method = "performShooting(Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;FF)V",
+		method = "performShooting(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;FF)V",
 		cancellable = true
 	)
 	private static void performShooting(
@@ -48,7 +48,7 @@ public class MixinCrossbowItem {
 	
 	@Inject(
 		at = @At("HEAD"),
-		method = "getChargeDuration(Lnet/minecraft/item/ItemStack;)I",
+		method = "getChargeDuration(Lnet/minecraft/world/item/ItemStack;)I",
 		cancellable = true
 	)
 	private static void getChargeDuration(
@@ -64,7 +64,7 @@ public class MixinCrossbowItem {
 	
 	@Inject(
 		at = @At("HEAD"),
-		method = "shootProjectile(Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;FZFFF)V",
+		method = "shootProjectile(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;FZFFF)V",
 		cancellable = true
 	)
 	private static void shootProjectile(
