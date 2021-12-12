@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3d;
 import com.mojang.math.Vector3f;
 
 import net.minecraft.sounds.SoundEvents;
@@ -23,7 +22,6 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.data.SoundDefinition.SoundType;
 
 public interface IModifiedCrossbowMethod {
 

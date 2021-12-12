@@ -1,6 +1,5 @@
 package de.dertoaster.crossbowverhaul.item;
 
-import java.util.Properties;
 import java.util.function.Predicate;
 
 import net.minecraft.world.item.ItemStack;
