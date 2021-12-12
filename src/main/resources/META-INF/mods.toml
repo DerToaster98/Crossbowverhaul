@@ -47,5 +47,5 @@ This is a replacer for the vanilla crossbow
     side="BOTH"
 [[dependencies.crossbowverhaul]]
     modId="mixinbootstrap"
-	mandatory=true
+	mandatory=false
 	side="BOTH"
