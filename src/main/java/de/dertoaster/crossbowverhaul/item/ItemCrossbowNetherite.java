@@ -38,7 +38,7 @@ public class ItemCrossbowNetherite extends ItemCrossbow implements IModifiedCros
 	// Override charging duration
 	@Override
 	public int getMaxChargeTime() {
-		return 2 * super.getMaxChargeTime();
+		return (int)(1.5D * super.getMaxChargeTime());
 	}
 
 }
