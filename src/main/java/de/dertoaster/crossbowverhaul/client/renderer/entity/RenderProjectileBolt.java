@@ -4,8 +4,8 @@ import de.dertoaster.crossbowverhaul.CrossbowverhaulMod;
 import de.dertoaster.crossbowverhaul.entity.projectile.ProjectileBolt;
 import de.dertoaster.crossbowverhaul.entity.projectile.ProjectileBoltExplosive;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -19,7 +19,7 @@ public class RenderProjectileBolt<T extends ProjectileBolt> extends ArrowRendere
 	
 	private static final ResourceLocation TEXTURE_BOLT_EXPLOSIVE = new ResourceLocation(CrossbowverhaulMod.MODID, "textures/entity/projectiles/bolt_explosive.png");
 	
-	public RenderProjectileBolt(EntityRendererManager renderManager) {
+	public RenderProjectileBolt(EntityRendererProvider.Context renderManager) {
 		super(renderManager);
 	}
 

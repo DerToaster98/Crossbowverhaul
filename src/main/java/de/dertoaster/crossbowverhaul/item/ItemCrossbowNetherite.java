@@ -1,9 +1,10 @@
 package de.dertoaster.crossbowverhaul.item;
 
+import java.util.Properties;
 import java.util.function.Predicate;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class ItemCrossbowNetherite extends ItemCrossbow implements IModifiedCrossbowMethod {
 

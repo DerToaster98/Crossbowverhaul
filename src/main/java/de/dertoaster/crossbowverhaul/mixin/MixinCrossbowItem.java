@@ -7,11 +7,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import de.dertoaster.crossbowverhaul.item.IModifiedCrossbowMethod;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.CrossbowItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 @Mixin(CrossbowItem.class)
 public class MixinCrossbowItem {
@@ -30,9 +30,9 @@ public class MixinCrossbowItem {
 		cancellable = true
 	)
 	private static void performShooting(
-		World world, 
+		Level world, 
 		LivingEntity shooter, 
-		Hand hand, 
+		InteractionHand hand, 
 		ItemStack crossbow, 
 		float speed, 
 		float divergence, 
@@ -68,9 +68,9 @@ public class MixinCrossbowItem {
 		cancellable = true
 	)
 	private static void shootProjectile(
-		World world, 
+		Level world, 
 		LivingEntity shooter, 
-		Hand handUsed, 
+		InteractionHand handUsed, 
 		ItemStack crossbow, 
 		ItemStack projectileStack, 
 		float shootSoundPitch, 

@@ -3,24 +3,27 @@ package de.dertoaster.crossbowverhaul.item;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.ICrossbowUser;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.entity.projectile.FireworkRocketEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.item.CrossbowItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.world.World;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3d;
+import com.mojang.math.Vector3f;
+
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.CrossbowAttackMob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.FireworkRocketEntity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.data.SoundDefinition.SoundType;
 
 public interface IModifiedCrossbowMethod {
 
@@ -37,18 +40,18 @@ public interface IModifiedCrossbowMethod {
 
 		for (int i = 0; i < multiShotLevel; i++) {
 			boolean currentFlag = rnd.nextBoolean();
-			result[i] = CrossbowItem.getRandomShotPitch(currentFlag);
-			result[result.length - (i + 1)] = CrossbowItem.getRandomShotPitch(!currentFlag);
+			result[i] = CrossbowItem.getRandomShotPitch(currentFlag, rnd);
+			result[result.length - (i + 1)] = CrossbowItem.getRandomShotPitch(!currentFlag, rnd);
 		}
 		result[multiShotLevel] = 1.0F;
 
 		return result;
 	}
 
-	public default void modifiedPerformShooting(World world, LivingEntity shooter, Hand handUsed, ItemStack crossbow, float speed, float divergence) {
+	public default void modifiedPerformShooting(Level world, LivingEntity shooter, InteractionHand handUsed, ItemStack crossbow, float speed, float divergence) {
 		List<ItemStack> list = CrossbowItem.getChargedProjectiles(crossbow);
 		final int msLevel = (list.size() - 1) / 2;
-		final boolean creativeModeFlag = shooter instanceof PlayerEntity && ((PlayerEntity) shooter).abilities.instabuild;
+		final boolean creativeModeFlag = shooter instanceof Player && ((Player) shooter).getAbilities().instabuild;
 
 		if (msLevel <= 0) {
 			CrossbowItem.shootProjectile(world, shooter, handUsed, crossbow, list.get(0), 1.0F, creativeModeFlag, speed, divergence, 0.0F);
@@ -74,27 +77,27 @@ public interface IModifiedCrossbowMethod {
 		CrossbowItem.onCrossbowShot(world, shooter, crossbow);
 	}
 
-	public default void modifiedShootProjectile(World world, LivingEntity shooter, Hand handUsed, ItemStack crossbow, ItemStack projectileStack, float shootSoundPitch, boolean flagProjectileCantBePickedUp, float speed, float divergence,
+	public default void modifiedShootProjectile(Level world, LivingEntity shooter, InteractionHand handUsed, ItemStack crossbow, ItemStack projectileStack, float shootSoundPitch, boolean flagProjectileCantBePickedUp, float speed, float divergence,
 			float simulated) {
 		if (!world.isClientSide) {
 			boolean flag = projectileStack.getItem() == Items.FIREWORK_ROCKET;
-			ProjectileEntity projectileentity;
+			Projectile projectileentity;
 			if (flag) {
 				projectileentity = new FireworkRocketEntity(world, projectileStack, shooter, shooter.getX(), shooter.getEyeY() - (double) 0.15F, shooter.getZ(), true);
 			} else {
 				projectileentity = CrossbowItem.getArrow(world, shooter, crossbow, projectileStack);
 				if (flagProjectileCantBePickedUp || simulated != 0.0F) {
-					((AbstractArrowEntity) projectileentity).pickup = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
+					((AbstractArrow) projectileentity).pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
 				}
 			}
 
-			if (shooter instanceof ICrossbowUser) {
-				ICrossbowUser icrossbowuser = (ICrossbowUser) shooter;
+			if (shooter instanceof CrossbowAttackMob) {
+				CrossbowAttackMob icrossbowuser = (CrossbowAttackMob) shooter;
 				icrossbowuser.shootCrossbowProjectile(icrossbowuser.getTarget(), crossbow, projectileentity, simulated);
 			} else {
-				Vector3d vector3d1 = shooter.getUpVector(1.0F);
+				Vec3 vector3d1 = shooter.getUpVector(1.0F);
 				Quaternion quaternion = new Quaternion(new Vector3f(vector3d1), simulated, true);
-				Vector3d vector3d = shooter.getViewVector(1.0F);
+				Vec3 vector3d = shooter.getViewVector(1.0F);
 				Vector3f vector3f = new Vector3f(vector3d);
 				vector3f.transform(quaternion);
 				projectileentity.shoot((double) vector3f.x(), (double) vector3f.y(), (double) vector3f.z(), speed * this.getProjectileSpeedModifier(), divergence);
@@ -104,7 +107,7 @@ public interface IModifiedCrossbowMethod {
 				shooterTmp.broadcastBreakEvent(handUsed);
 			});
 			world.addFreshEntity(projectileentity);
-			world.playSound((PlayerEntity) null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.CROSSBOW_SHOOT, SoundCategory.PLAYERS, 1.0F, shootSoundPitch);
+			world.playSound((Player) null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.CROSSBOW_SHOOT, SoundSource.PLAYERS, 1.0F, shootSoundPitch);
 		}
 	}
 

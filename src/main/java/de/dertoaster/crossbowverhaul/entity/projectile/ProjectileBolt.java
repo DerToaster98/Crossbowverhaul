@@ -4,47 +4,47 @@ import javax.annotation.Nullable;
 
 import de.dertoaster.crossbowverhaul.init.ModEntityTypes;
 import de.dertoaster.crossbowverhaul.init.ModItems;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTier;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tiers;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.network.NetworkHooks;
 
-public class ProjectileBolt extends AbstractArrowEntity {
+public class ProjectileBolt extends AbstractArrow {
 	
-	private static final DataParameter<Integer> ID_TIER = EntityDataManager.defineId(ProjectileBolt.class, DataSerializers.INT);
+	private static final EntityDataAccessor<Integer> ID_TIER = SynchedEntityData.defineId(ProjectileBolt.class, EntityDataSerializers.INT);
 
-	public ProjectileBolt(EntityType<? extends ProjectileBolt> entityType, World world) {
+	public ProjectileBolt(EntityType<? extends ProjectileBolt> entityType, Level world) {
 		super(entityType, world);
 		this.setBaseDamage(this.getBaseDamage());
 	}
 
-	public ProjectileBolt(World p_i46757_1_, double px, double py, double pz) {
+	public ProjectileBolt(Level p_i46757_1_, double px, double py, double pz) {
 		this(ModEntityTypes.BOLT.get(), px, py, pz, p_i46757_1_);
 		this.setBaseDamage(this.getBaseDamage());
 	}
 	
-	protected ProjectileBolt(EntityType<? extends ProjectileBolt> type, double x, double y, double z, World w) {
+	protected ProjectileBolt(EntityType<? extends ProjectileBolt> type, double x, double y, double z, Level w) {
 		super(type, x, y, z, w);
 	}
 
-	public ProjectileBolt(World p_i46758_1_, LivingEntity shooter) {
+	public ProjectileBolt(Level p_i46758_1_, LivingEntity shooter) {
 		this(ModEntityTypes.BOLT.get(), shooter, p_i46758_1_);
 		this.setBaseDamage(this.getBaseDamage());
 	}
 	
-	protected ProjectileBolt(EntityType<? extends ProjectileBolt> type, LivingEntity shooter, World world) {
+	protected ProjectileBolt(EntityType<? extends ProjectileBolt> type, LivingEntity shooter, Level world) {
 		super(type, shooter, world);
 	}
 	
-	public void setTier(ItemTier tier) {
+	public void setTier(Tiers tier) {
 		if(this.level.isClientSide()) {
 			return;
 		}
@@ -72,18 +72,18 @@ public class ProjectileBolt extends AbstractArrowEntity {
 	}
 	
 	@Nullable
-	public ItemTier getTier() {
+	public Tiers getTier() {
 		final int tierIdx = this.entityData.get(ID_TIER);
-		if (tierIdx >= ItemTier.values().length) {
+		if (tierIdx >= Tiers.values().length) {
 			return null;
 		}
-		return ItemTier.values()[tierIdx];
+		return Tiers.values()[tierIdx];
 	}
 
 	@Override
 	public void setBaseDamage(double newValue) {
 		//DONE: Add the damage value of the tier to it!
-		final ItemTier myTier = this.getTier();
+		final Tiers myTier = this.getTier();
 		double addDmg = 0;
 		switch(myTier) {
 		case GOLD:
@@ -112,22 +112,22 @@ public class ProjectileBolt extends AbstractArrowEntity {
 	}
 	
 	@Override
-	public void addAdditionalSaveData(CompoundNBT nbt) {
+	public void addAdditionalSaveData(CompoundTag nbt) {
 		super.addAdditionalSaveData(nbt);
 		
 		nbt.putString("bolt_tier", this.getTier().toString());
 	}
 	
 	@Override
-	public void readAdditionalSaveData(CompoundNBT nbt) {
+	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
 		
-		this.setTier(ItemTier.valueOf(nbt.getString("bolt_tier")));
+		this.setTier(Tiers.valueOf(nbt.getString("bolt_tier")));
 	}
 	
 	//Why tf do i need this?!
 	@Override
-	public IPacket<?> getAddEntityPacket() {
+	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 

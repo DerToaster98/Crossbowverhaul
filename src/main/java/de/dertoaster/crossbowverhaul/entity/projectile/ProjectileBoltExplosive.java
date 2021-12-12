@@ -1,37 +1,37 @@
 package de.dertoaster.crossbowverhaul.entity.projectile;
 
 import de.dertoaster.crossbowverhaul.init.ModEntityTypes;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTier;
-import net.minecraft.network.IPacket;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.Explosion.Mode;
-import net.minecraftforge.fml.network.NetworkHooks;
-import net.minecraft.world.World;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tiers;
+import net.minecraft.world.level.Explosion.BlockInteraction;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
+import net.minecraftforge.network.NetworkHooks;
 
 public class ProjectileBoltExplosive extends ProjectileBolt {
 
-	public ProjectileBoltExplosive(EntityType<? extends ProjectileBolt> entityType, World world) {
+	public ProjectileBoltExplosive(EntityType<? extends ProjectileBolt> entityType, Level world) {
 		super(entityType, world);
 		this.setBaseDamage(this.getBaseDamage());
 	}
 
-	public ProjectileBoltExplosive(World p_i46757_1_, double px, double py, double pz) {
+	public ProjectileBoltExplosive(Level p_i46757_1_, double px, double py, double pz) {
 		super(ModEntityTypes.BOLT_EXPLOSIVE.get(), px, py, pz, p_i46757_1_);
 		this.setBaseDamage(this.getBaseDamage());
 	}
 
-	public ProjectileBoltExplosive(World p_i46758_1_, LivingEntity shooter) {
+	public ProjectileBoltExplosive(Level p_i46758_1_, LivingEntity shooter) {
 		super(ModEntityTypes.BOLT_EXPLOSIVE.get(), shooter, p_i46758_1_);
 		this.setBaseDamage(this.getBaseDamage());
 	}
 	
 	@Override
-	public ItemTier getTier() {
-		return ItemTier.NETHERITE;
+	public Tiers getTier() {
+		return Tiers.NETHERITE;
 	}
 	
 	@Override
@@ -49,18 +49,18 @@ public class ProjectileBoltExplosive extends ProjectileBolt {
 	}
 	
 	@Override
-	protected void onHit(RayTraceResult rayTraceResult) {
+	protected void onHit(HitResult rayTraceResult) {
 		if(!this.level.isClientSide) {
-			this.level.explode(this.getOwner(), this.xo, this.yo, this.zo, 3.0F, Mode.DESTROY);
+			this.level.explode(this.getOwner(), this.xo, this.yo, this.zo, 3.0F, BlockInteraction.DESTROY);
 		}
 		
 		super.onHit(rayTraceResult);
 		
-		this.remove();
+		this.remove(RemovalReason.KILLED);
 	}
 	
 	@Override
-	public IPacket<?> getAddEntityPacket() {
+	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
