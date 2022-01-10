@@ -12,7 +12,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -34,10 +34,10 @@ public class CrossbowverhaulMod
     	//Register enchantment overrides
     	ModEnchantments.registerToEventBus(modbus);
     }
-    
+
     @SubscribeEvent
-    public static void onCommonSetup(FMLCommonSetupEvent event) {
-        ModItemProperties.register();
+    public static void onClientSetup(FMLClientSetupEvent event) {
+    	event.enqueueWork(() -> ModItemProperties.register());
     }
 
 }
