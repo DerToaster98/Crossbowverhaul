@@ -5,5 +5,15 @@
 	"item.crossbowverhaul.bolt_netherite": "Netherite Bolt",
 	"item.crossbowverhaul.bolt_explosive": "Explosive Bolt",
 	
-	"item.crossbowverhaul.crossbow_netherite": "Netherite Crossbow"
+	"item.crossbowverhaul.crossbow_netherite": "Netherite Crossbow",
+	
+	"item.crossbowverhaul.tooltip.hold_shift": "\u00A79Hold \u00A7f[\u00A7eSHIFT\u00A7f]\u00A79 to see more",
+	"item.crossbowverhaul.boltdamagetooltip": "\u00A79Bolt Base Damage: %d",
+	
+	"item.crossbowverhaul.bolt_iron.tooltip": "\u00A79A normal bolt made of iron",
+	"item.crossbowverhaul.bolt_gold.tooltip": "\u00A79Shiny",
+	"item.crossbowverhaul.bolt_diamond.tooltip": "\u00A79A bolt made out of diamonds",
+	"item.crossbowverhaul.bolt_netherite.tooltip": "\u00A79The most refined version of a bolt",
+	"item.crossbowverhaul.bolt_explosive.tooltip": "\u00A79A crossbow bolt.\u00A7c EXPLODES ON IMPACT!"
+	
 }   
