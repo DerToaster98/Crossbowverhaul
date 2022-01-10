@@ -80,28 +80,27 @@ public class ProjectileBolt extends AbstractArrowEntity {
 		return ItemTier.values()[tierIdx];
 	}
 
+	public static double getAdditionalDamageOf(Tiers tier) {
+		switch(tier) {
+		case GOLD:
+			return 0.5;
+		case IRON:
+			return 1.0;
+		case DIAMOND:
+			return 3.0;
+		case NETHERITE:
+			return 4.0;
+		default:
+			return 0;
+		}
+	}
+	
 	@Override
 	public void setBaseDamage(double newValue) {
 		//DONE: Add the damage value of the tier to it!
-		final ItemTier myTier = this.getTier();
-		double addDmg = 0;
-		switch(myTier) {
-		case GOLD:
-			addDmg = 0.5;
-			break;
-		case IRON:
-			addDmg = 1.0;
-			break;
-		case DIAMOND:
-			addDmg = 3.0;
-			break;
-		case NETHERITE:
-			addDmg = 4.0;
-			break;
-		default:
-			break;
+		final Tiers myTier = this.getTier();
+		double addDmg = getAdditionalDamageOf(myTier);
 		
-		}
 		super.setBaseDamage(newValue + addDmg);
 	}
 	
