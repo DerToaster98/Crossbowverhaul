@@ -44,19 +44,37 @@ public class ProjectileBolt extends AbstractArrowEntity {
 		super(type, shooter, world);
 	}
 	
-	public void setTier(ItemTier tier) {
+	public void setTier(Tier tier) {
 		if(this.level.isClientSide()) {
 			return;
 		}
-		this.entityData.set(ID_TIER, tier.ordinal());
+		int tierID = Tiers.values().length;
+		for(Tiers et : Tiers.values()) {
+			if((Tier)et == this.getTier()) {
+				tierID = et.ordinal();
+				break;
+			}
+		}
+		this.entityData.set(ID_TIER, tierID);
 		
 		//recalculate our basse damage
 		this.setBaseDamage(this.getBaseDamage());
 	}
 
+	public int getSynchedTierID() {
+		return this.entityData.get(ID_TIER);
+	}
+	
 	@Override
 	protected ItemStack getPickupItem() {
-		switch (this.getTier()) {
+		Tiers etier = Tiers.WOOD;
+		for(Tiers et : Tiers.values()) {
+			if((Tier)et == this.getTier()) {
+				etier = et;
+				break;
+			}
+		}
+		switch (etier) {
 		case DIAMOND:
 			return ModItems.ITEM_BOLT_DIAMOND.get().getDefaultInstance();
 		case GOLD:
@@ -72,7 +90,7 @@ public class ProjectileBolt extends AbstractArrowEntity {
 	}
 	
 	@Nullable
-	public ItemTier getTier() {
+	public Tier getTier() {
 		final int tierIdx = this.entityData.get(ID_TIER);
 		if (tierIdx >= ItemTier.values().length) {
 			return null;
@@ -80,25 +98,26 @@ public class ProjectileBolt extends AbstractArrowEntity {
 		return ItemTier.values()[tierIdx];
 	}
 
-	public static double getAdditionalDamageOf(Tiers tier) {
-		switch(tier) {
-		case GOLD:
+	public static double getAdditionalDamageOf(Tier tier) {
+		if(tier == (Tier)Tiers.GOLD) {
 			return 0.5;
-		case IRON:
-			return 1.0;
-		case DIAMOND:
-			return 3.0;
-		case NETHERITE:
-			return 4.0;
-		default:
-			return 0;
 		}
+		if(tier == (Tier)Tiers.IRON) {
+			return 0.5;
+		}
+		if(tier == (Tier)Tiers.DIAMOND) {
+			return 0.5;
+		}
+		if(tier == (Tier)Tiers.NETHERITE) {
+			return 0.5;
+		}
+		return tier.getAttackDamageBonus();
 	}
 	
 	@Override
 	public void setBaseDamage(double newValue) {
 		//DONE: Add the damage value of the tier to it!
-		final Tiers myTier = this.getTier();
+		final Tier myTier = this.getTier();
 		double addDmg = getAdditionalDamageOf(myTier);
 		
 		super.setBaseDamage(newValue + addDmg);

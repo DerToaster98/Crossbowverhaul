@@ -12,12 +12,22 @@ import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTier;
 import net.minecraft.world.World;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.ArrowItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 
 public class ItemBolt extends ArrowItem {
 
-	protected final ItemTier tier;
+	protected final Tier tier;
 
-	public ItemBolt(Properties properties, final ItemTier tier) {
+	public ItemBolt(Properties properties, final Tier tier) {
 		super(properties);
 		this.tier = tier;
 	}
@@ -29,7 +39,7 @@ public class ItemBolt extends ArrowItem {
 		return bolt;
 	}
 
-	public ItemTier getTier() {
+	public Tier getTier() {
 		return this.tier;
 	}
 	

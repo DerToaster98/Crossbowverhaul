@@ -118,13 +118,22 @@ public class ItemCrossbow extends CrossbowItem implements IVanishable, IModified
 			for(ItemStack stack : loadedProjectiles) {
 				if(stack.getItem() instanceof ItemBolt) {
 					//System.out.println("Ordinal: " + ((ItemBolt)stack.getItem()).getTier().ordinal() + "   tier: " +  ((ItemBolt)stack.getItem()).getTier().toString());
-					return ((ItemBolt)stack.getItem()).getTier().ordinal();
+					return getItemPropertyValueForTier(((ItemBolt) stack.getItem()).getTier());
 				}
 			}
 		}
 		return 0;
 	}
 	
+	public static int getItemPropertyValueForTier(Tier tier) {
+		for(Tiers etier : Tiers.values()) {
+			if((Tier)etier == tier) {
+				return etier.ordinal();
+			}
+		}
+		return Tiers.values().length;
+	}
+
 	public static ItemStack getFirstLoadedBolt(ItemStack crossbow) {
 		List<ItemStack> loadedProjectiles = getChargedProjectiles(crossbow);
 		if(loadedProjectiles != null && !loadedProjectiles.isEmpty()) {
