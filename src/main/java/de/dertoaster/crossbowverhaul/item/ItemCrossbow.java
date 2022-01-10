@@ -12,6 +12,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.Vanishable;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -118,13 +120,22 @@ public class ItemCrossbow extends CrossbowItem implements Vanishable, IModifiedC
 			for(ItemStack stack : loadedProjectiles) {
 				if(stack.getItem() instanceof ItemBolt) {
 					//System.out.println("Ordinal: " + ((ItemBolt)stack.getItem()).getTier().ordinal() + "   tier: " +  ((ItemBolt)stack.getItem()).getTier().toString());
-					return ((ItemBolt)stack.getItem()).getTier().ordinal();
+					return getItemPropertyValueForTier(((ItemBolt) stack.getItem()).getTier());
 				}
 			}
 		}
 		return 0;
 	}
 	
+	public static int getItemPropertyValueForTier(Tier tier) {
+		for(Tiers etier : Tiers.values()) {
+			if((Tier)etier == tier) {
+				return etier.ordinal();
+			}
+		}
+		return Tiers.values().length;
+	}
+
 	public static ItemStack getFirstLoadedBolt(ItemStack crossbow) {
 		List<ItemStack> loadedProjectiles = getChargedProjectiles(crossbow);
 		if(loadedProjectiles != null && !loadedProjectiles.isEmpty()) {

@@ -12,15 +12,15 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 public class ItemBolt extends ArrowItem {
 
-	protected final Tiers tier;
+	protected final Tier tier;
 
-	public ItemBolt(Properties properties, final Tiers tier) {
+	public ItemBolt(Properties properties, final Tier tier) {
 		super(properties);
 		this.tier = tier;
 	}
@@ -32,7 +32,7 @@ public class ItemBolt extends ArrowItem {
 		return bolt;
 	}
 
-	public Tiers getTier() {
+	public Tier getTier() {
 		return this.tier;
 	}
 	

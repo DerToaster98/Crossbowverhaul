@@ -6,6 +6,7 @@ import de.dertoaster.crossbowverhaul.entity.projectile.ProjectileBoltExplosive;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Tiers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -28,7 +29,7 @@ public class RenderProjectileBolt<T extends ProjectileBolt> extends ArrowRendere
 		if(boltEntity instanceof ProjectileBoltExplosive) {
 			return TEXTURE_BOLT_EXPLOSIVE;
 		}
-		switch(boltEntity.getTier()) {
+		switch(Tiers.values()[boltEntity.getSynchedTierID()]) {
 		case DIAMOND:
 			return TEXTURE_BOLT_DIAMOND;
 		case GOLD:
