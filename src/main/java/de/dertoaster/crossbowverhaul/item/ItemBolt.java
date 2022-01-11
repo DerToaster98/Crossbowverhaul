@@ -20,6 +20,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
@@ -39,6 +40,15 @@ public class ItemBolt extends ArrowItem {
 		return bolt;
 	}
 
+	public int getIdForItemProperties() {
+		for(Tiers etier : Tiers.values()) {
+			if((Tier)etier == this.getTier()) {
+				return etier.ordinal();
+			}
+		}
+		return Tiers.values().length;
+	}
+	
 	public Tier getTier() {
 		return this.tier;
 	}

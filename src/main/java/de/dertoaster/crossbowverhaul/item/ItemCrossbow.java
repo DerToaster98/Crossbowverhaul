@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import de.dertoaster.crossbowverhaul.init.ModItems;
+
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.IVanishable;
@@ -117,21 +118,11 @@ public class ItemCrossbow extends CrossbowItem implements IVanishable, IModified
 		if(loadedProjectiles != null && !loadedProjectiles.isEmpty()) {
 			for(ItemStack stack : loadedProjectiles) {
 				if(stack.getItem() instanceof ItemBolt) {
-					//System.out.println("Ordinal: " + ((ItemBolt)stack.getItem()).getTier().ordinal() + "   tier: " +  ((ItemBolt)stack.getItem()).getTier().toString());
-					return getItemPropertyValueForTier(((ItemBolt) stack.getItem()).getTier());
+					return ((ItemBolt) stack.getItem()).getIdForItemProperties();
 				}
 			}
 		}
 		return 0;
-	}
-	
-	public static int getItemPropertyValueForTier(Tier tier) {
-		for(Tiers etier : Tiers.values()) {
-			if((Tier)etier == tier) {
-				return etier.ordinal();
-			}
-		}
-		return Tiers.values().length;
 	}
 
 	public static ItemStack getFirstLoadedBolt(ItemStack crossbow) {
