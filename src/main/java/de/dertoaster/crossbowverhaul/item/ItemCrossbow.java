@@ -116,8 +116,8 @@ public class ItemCrossbow extends CrossbowItem implements Vanishable, IModifiedC
 		List<ItemStack> loadedProjectiles = getChargedProjectiles(itemStack);
 		if(loadedProjectiles != null && !loadedProjectiles.isEmpty()) {
 			for(ItemStack stack : loadedProjectiles) {
-				if(stack.getItem() instanceof ItemBolt) {
-					return ((ItemBolt) stack.getItem()).getIdForItemProperties();
+				if(stack.getItem() instanceof AbstractItemBolt) {
+					return ((AbstractItemBolt) stack.getItem()).getIdForItemProperties();
 				}
 			}
 		}
