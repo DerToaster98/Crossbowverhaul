@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import de.dertoaster.crossbowverhaul.init.ModEntityTypes;
 import de.dertoaster.crossbowverhaul.init.ModItems;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
@@ -147,6 +148,15 @@ public class ProjectileBolt extends AbstractArrowEntity {
 	@Override
 	public IPacket<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
+	}
+	
+	@Override
+	protected void onHitEntity(EntityHitResult pResult) {
+		Entity ent = pResult.getEntity();
+		if(ent != null) {
+			ent.invulnerableTime = 0;
+		}
+		super.onHitEntity(pResult);
 	}
 
 }
