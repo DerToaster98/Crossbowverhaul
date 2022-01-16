@@ -104,13 +104,13 @@ public class ProjectileBolt extends AbstractArrow {
 			return 0.5;
 		}
 		if(tier == (Tier)Tiers.IRON) {
-			return 0.5;
+			return 1.0;
 		}
 		if(tier == (Tier)Tiers.DIAMOND) {
-			return 0.5;
+			return 3.0;
 		}
 		if(tier == (Tier)Tiers.NETHERITE) {
-			return 0.5;
+			return 4.0;
 		}
 		return tier.getAttackDamageBonus();
 	}
