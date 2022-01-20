@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "crossbowverhaul:crossbow_netherite"
+    ]
+  },
+  "criteria": {
+    "has_crossbow": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:crossbow"
+          }
+        ]
+      }
+    },
+    "has_netherite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/netherite"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crossbow",
+      "has_netherite"
+    ]
+  ]
+}
