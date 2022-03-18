@@ -6,6 +6,7 @@ import java.util.Random;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 
+import de.dertoaster.crossbowverhaul.init.ModItems;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -51,6 +52,10 @@ public interface IModifiedCrossbowMethod {
 		final int msLevel = (list.size() - 1) / 2;
 		final boolean creativeModeFlag = shooter instanceof Player && ((Player) shooter).getAbilities().instabuild;
 
+		if(list.isEmpty()) {
+			list.add(new ItemStack(ModItems.ITEM_BOLT_IRON.get(), 1));
+		}
+		
 		if (msLevel <= 0) {
 			CrossbowItem.shootProjectile(world, shooter, handUsed, crossbow, list.get(0), 1.0F, creativeModeFlag, speed, divergence, 0.0F);
 		} else {
