@@ -50,6 +50,10 @@ public interface IModifiedCrossbowMethod {
 		final int msLevel = (list.size() - 1) / 2;
 		final boolean creativeModeFlag = shooter instanceof PlayerEntity && ((PlayerEntity) shooter).abilities.instabuild;
 
+		if(list.isEmpty()) {
+			list.add(new ItemStack(ModItems.ITEM_BOLT_IRON.get(), 1));
+		}
+		
 		if (msLevel <= 0) {
 			CrossbowItem.shootProjectile(world, shooter, handUsed, crossbow, list.get(0), 1.0F, creativeModeFlag, speed, divergence, 0.0F);
 		} else {
