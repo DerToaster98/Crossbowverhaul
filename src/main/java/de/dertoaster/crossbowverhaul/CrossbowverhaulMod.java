@@ -3,15 +3,18 @@ package de.dertoaster.crossbowverhaul;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import de.dertoaster.crossbowverhaul.config.CrossbowverhaulConfigHolder;
 import de.dertoaster.crossbowverhaul.init.ModEnchantments;
 import de.dertoaster.crossbowverhaul.init.ModEntityTypes;
 import de.dertoaster.crossbowverhaul.init.ModItemProperties;
 import de.dertoaster.crossbowverhaul.init.ModItems;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -26,6 +29,9 @@ public class CrossbowverhaulMod
 
     public CrossbowverhaulMod() {
     	IEventBus modbus = FMLJavaModLoadingContext.get().getModEventBus();
+    	
+    	//Register config
+    	ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CrossbowverhaulConfigHolder.ITEM_CONFIG_SPEC);
     	
     	//Register items
     	ModItems.registerToEventBus(modbus);
