@@ -3,6 +3,7 @@ package de.dertoaster.crossbowverhaul.item;
 import java.util.List;
 import java.util.function.Predicate;
 
+import de.dertoaster.crossbowverhaul.config.CrossbowverhaulConfigHolder;
 import de.dertoaster.crossbowverhaul.init.ModItems;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -140,6 +141,16 @@ public class ItemCrossbow extends CrossbowItem implements Vanishable, IModifiedC
 	@Override
 	public int getMaxChargeTime() {
 		return 2 * IModifiedCrossbowMethod.super.getMaxChargeTime();
+	}
+	
+	@Override
+	public boolean isEnchantable(ItemStack p_41456_) {
+		return super.isEnchantable(p_41456_) && CrossbowverhaulConfigHolder.coEnchCrossbow.get();
+	}
+	
+	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+		return super.isBookEnchantable(stack, book) && CrossbowverhaulConfigHolder.coEnchCrossbow.get();
 	}
 	
 }
