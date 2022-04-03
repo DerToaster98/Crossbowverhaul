@@ -31,7 +31,7 @@ public class CrossbowverhaulMod
     	IEventBus modbus = FMLJavaModLoadingContext.get().getModEventBus();
     	
     	//Register config
-    	ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CrossbowverhaulConfigHolder.ITEM_CONFIG_SPEC);
+    	ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CrossbowverhaulConfigHolder.SPEC, "co-config.toml");
     	
     	//Register items
     	ModItems.registerToEventBus(modbus);

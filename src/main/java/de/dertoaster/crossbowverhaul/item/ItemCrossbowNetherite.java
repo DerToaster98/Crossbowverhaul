@@ -20,6 +20,16 @@ public class ItemCrossbowNetherite extends ItemCrossbow implements IModifiedCros
 	public Predicate<ItemStack> getAllSupportedProjectiles() {
 		return PREDICATE_BOLTS_ONLY;
 	}
+	
+	@Override
+	public boolean isEnchantable(ItemStack p_41456_) {
+		return super.isEnchantable(p_41456_) && CrossbowverhaulConfigHolder.coEnchNetheriteCrossbow.get();
+	}
+	
+	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+		return super.isBookEnchantable(stack, book) && CrossbowverhaulConfigHolder.coEnchNetheriteCrossbow.get();
+	}
 
 	public ItemCrossbowNetherite(Properties properties) {
 		super(properties);
