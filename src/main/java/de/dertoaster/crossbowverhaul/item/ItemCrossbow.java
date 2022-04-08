@@ -26,7 +26,7 @@ public class ItemCrossbow extends CrossbowItem implements IVanishable, IModified
 	};
 	
 	protected static final Predicate<ItemStack> PREDICATE_BOLTS_ONLY_NO_EXPLOSIVE = (itemstack) -> {
-		return itemstack.getItem() instanceof ItemBolt && !(itemstack.getItem() instanceof ItemBoltExplosive);
+		return itemstack.getItem() instanceof ItemBolt && (CrossbowverhaulConfigHolder.coAllowExplosiveBoltsOnNormalCrossbow.get() || !(itemstack.getItem() instanceof ItemBoltExplosive));
 	};
 
 	//This only checks the items in off and main hand

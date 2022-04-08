@@ -5,9 +5,10 @@ import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 
 public class CrossbowverhaulConfigHolder {
 	
-	private static final boolean allowEnchantmentsOnCrossbow = true;
-	private static final boolean allowEnchantmentsOnNetheriteCrossbow = true;
-	private static final int modifyMultiShotEnchantment = 3;
+	private static final boolean defaultAllowEnchantmentsOnCrossbow = true;
+	private static final boolean defaultAllowEnchantmentsOnNetheriteCrossbow = true;
+	private static final boolean defaultAllowExplosiveBoltsOnNormalCrossbow = false;
+	private static final int defaultModifyMultiShotEnchantment = 3;
 	private static final double defaultModCrossbowChargeTime = 2.0D;
 	private static final double defaultModNetheriteCrossbowChargeTime = 3.0D;
 	private static final float defaultModCrossbowProjectileSpeed = 1.0F;
@@ -17,6 +18,7 @@ public class CrossbowverhaulConfigHolder {
 	
 	public static final ConfigValue<Boolean> coEnchCrossbow;
 	public static final ConfigValue<Boolean> coEnchNetheriteCrossbow;
+	public static final ConfigValue<Boolean> coAllowExplosiveBoltsOnNormalCrossbow;
 	public static final ConfigValue<Integer> coModMultishot;
 	public static final ConfigValue<Double> coModCrossbowChargeTime;
 	public static final ConfigValue<Double> coModNetheriteCrossbowChargeTime;
@@ -34,11 +36,15 @@ public class CrossbowverhaulConfigHolder {
 		
 			coEnchCrossbow = BUILDER
 					.comment("Enable enchantments on the standard crossbow")
-					.define("Enable enchants on crossbow", allowEnchantmentsOnCrossbow);
+					.define("Enable enchants on crossbow", defaultAllowEnchantmentsOnCrossbow);
 			
 			coEnchNetheriteCrossbow = BUILDER
 					.comment("Enable enchantments on the netherite crossbow")
-					.define("Enable enchants on netherite crossbow", allowEnchantmentsOnNetheriteCrossbow);
+					.define("Enable enchants on netherite crossbow", defaultAllowEnchantmentsOnNetheriteCrossbow);
+			
+			coAllowExplosiveBoltsOnNormalCrossbow = BUILDER
+					.comment("Allow explosive bolts to be fired from the standard crossbow")
+					.define("Explosive bolts on non-netherite crossbow", defaultAllowExplosiveBoltsOnNormalCrossbow);
 			
 			coModCrossbowChargeTime = BUILDER
 					.comment("Multiplier for the standard crossbow's charge time, base charge time is 25 ticks")
@@ -70,7 +76,7 @@ public class CrossbowverhaulConfigHolder {
 		
 			coModMultishot = BUILDER
 					.comment("Maximum level of multishot. Resulting projctiles: (<value> * 2) + 1. For vanilla values, set it to 1")
-					.defineInRange("Modify multishot enchantment", modifyMultiShotEnchantment, 1, Integer.MAX_VALUE);
+					.defineInRange("Modify multishot enchantment", defaultModifyMultiShotEnchantment, 1, Integer.MAX_VALUE);
 		
 		BUILDER.pop();
 		
