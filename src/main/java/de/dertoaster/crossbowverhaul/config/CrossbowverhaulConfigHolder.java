@@ -8,6 +8,8 @@ public class CrossbowverhaulConfigHolder {
 	private static final boolean defaultAllowEnchantmentsOnCrossbow = true;
 	private static final boolean defaultAllowEnchantmentsOnNetheriteCrossbow = true;
 	private static final boolean defaultAllowExplosiveBoltsOnNormalCrossbow = false;
+	private static final int defaultCrossbowDurability = 512;
+	private static final int defaultNetheriteCrossbowDurability = 1024;
 	private static final int defaultModifyMultiShotEnchantment = 3;
 	private static final double defaultModCrossbowChargeTime = 2.0D;
 	private static final double defaultModNetheriteCrossbowChargeTime = 3.0D;
@@ -20,6 +22,8 @@ public class CrossbowverhaulConfigHolder {
 	public static final ConfigValue<Boolean> coEnchNetheriteCrossbow;
 	public static final ConfigValue<Boolean> coAllowExplosiveBoltsOnNormalCrossbow;
 	public static final ConfigValue<Integer> coModMultishot;
+	public static final ConfigValue<Integer> coCrossbowDurability;
+	public static final ConfigValue<Integer> coNetheriteCrossbowDurability;
 	public static final ConfigValue<Double> coModCrossbowChargeTime;
 	public static final ConfigValue<Double> coModNetheriteCrossbowChargeTime;
 	public static final ConfigValue<Float> coModCrossbowProjectileSpeed;
@@ -33,6 +37,18 @@ public class CrossbowverhaulConfigHolder {
 	static {
 		
 		BUILDER.push("co-item");
+		
+			BUILDER.push("requires-game-restart");
+		
+				coCrossbowDurability = BUILDER
+						.worldRestart()
+						.defineInRange("Crossbow durability", defaultCrossbowDurability, 1, Integer.MAX_VALUE);
+				
+				coNetheriteCrossbowDurability = BUILDER
+						.worldRestart()
+						.defineInRange("Netherite Crossbow durability", defaultNetheriteCrossbowDurability, 1, Integer.MAX_VALUE);
+			
+			BUILDER.pop();
 		
 			coEnchCrossbow = BUILDER
 					.comment("Enable enchantments on the standard crossbow")
