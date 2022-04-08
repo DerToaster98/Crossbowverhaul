@@ -21,7 +21,7 @@ public class CrossbowverhaulConfigHolder {
 		BUILDER.push("co-item");
 		
 			coEnchCrossbow = BUILDER
-					.comment("Enable enchantments on the crossbow")
+					.comment("Enable enchantments on all crossbow type weapons")
 					.define("Enable enchants on crossbow", allowEnchantmentsOnCrossbow);
 			
 			coEnchNetheriteCrossbow = BUILDER
