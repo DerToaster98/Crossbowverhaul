@@ -144,14 +144,22 @@ public class ItemCrossbow extends CrossbowItem implements IVanishable, IModified
 		return 2 * IModifiedCrossbowMethod.super.getMaxChargeTime();
 	}
 	
+	protected boolean parentClassIsEnchantable(ItemStack stack) {
+		return super.isEnchantable(stack);
+	}
+	
+	protected boolean parentClassIsBookEnchantable(ItemStack stack, ItemStack book) {
+		return super.isEnchantable(stack);
+	}
+	
 	@Override
 	public boolean isEnchantable(ItemStack p_41456_) {
-		return super.isEnchantable(p_41456_) && CrossbowverhaulConfigHolder.coEnchCrossbow.get();
+		return this.parentClassIsEnchantable(p_41456_) && CrossbowverhaulConfigHolder.coEnchCrossbow.get();
 	}
 	
 	@Override
 	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-		return super.isBookEnchantable(stack, book) && CrossbowverhaulConfigHolder.coEnchCrossbow.get();
+		return this.parentClassIsBookEnchantable(stack, book) && CrossbowverhaulConfigHolder.coEnchCrossbow.get();
 	}
 	
 }
