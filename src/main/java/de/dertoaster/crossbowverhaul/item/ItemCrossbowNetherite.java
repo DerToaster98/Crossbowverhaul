@@ -37,18 +37,18 @@ public class ItemCrossbowNetherite extends ItemCrossbow implements IModifiedCros
 
 	@Override
 	public int getDefaultProjectileRange() {
-		return (int)(1.5 * super.getDefaultProjectileRange());
+		return (int)(CrossbowverhaulConfigHolder.coModNetheriteCrossbowProjectileRange.get() * (super.getDefaultProjectileRange() / CrossbowverhaulConfigHolder.coModCrossbowProjectileRange.get()));
 	}
 	
 	@Override
 	public float getProjectileSpeedModifier() {
-		return 1.5F * super.getProjectileSpeedModifier();
+		return CrossbowverhaulConfigHolder.coModNetheriteCrossbowProjectileSpeed.get() * (super.getProjectileSpeedModifier() / CrossbowverhaulConfigHolder.coModCrossbowProjectileSpeed.get());
 	}
 
 	// Override charging duration
 	@Override
 	public int getMaxChargeTime() {
-		return 2 * super.getMaxChargeTime();
+		return (int)(CrossbowverhaulConfigHolder.coModNetheriteCrossbowChargeTime.get() * (super.getMaxChargeTime() / CrossbowverhaulConfigHolder.coModCrossbowChargeTime.get()));
 	}
 
 }
