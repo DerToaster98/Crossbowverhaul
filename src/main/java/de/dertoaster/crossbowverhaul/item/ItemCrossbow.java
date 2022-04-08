@@ -140,7 +140,17 @@ public class ItemCrossbow extends CrossbowItem implements Vanishable, IModifiedC
 	//Override charging duration
 	@Override
 	public int getMaxChargeTime() {
-		return 2 * IModifiedCrossbowMethod.super.getMaxChargeTime();
+		return (int)(CrossbowverhaulConfigHolder.coModCrossbowChargeTime.get() * IModifiedCrossbowMethod.super.getMaxChargeTime());
+	}
+	
+	@Override
+	public int getDefaultProjectileRange() {
+		return (int)(CrossbowverhaulConfigHolder.coModCrossbowProjectileRange.get() * super.getDefaultProjectileRange());
+	}
+	
+	@Override
+	public float getProjectileSpeedModifier() {
+		return CrossbowverhaulConfigHolder.coModCrossbowProjectileSpeed.get() * IModifiedCrossbowMethod.super.getProjectileSpeedModifier();
 	}
 	
 	protected boolean parentClassIsEnchantable(ItemStack stack) {
