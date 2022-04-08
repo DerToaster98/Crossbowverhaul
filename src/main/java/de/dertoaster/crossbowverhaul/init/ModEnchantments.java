@@ -1,8 +1,6 @@
 package de.dertoaster.crossbowverhaul.init;
 
-import de.dertoaster.crossbowverhaul.config.CrossbowverhaulConfigHolder;
 import de.dertoaster.crossbowverhaul.enchantment.MultishotEnchantment;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraftforge.eventbus.api.IEventBus;

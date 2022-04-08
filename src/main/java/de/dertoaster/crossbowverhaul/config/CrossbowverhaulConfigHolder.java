@@ -7,11 +7,11 @@ public class CrossbowverhaulConfigHolder {
 	
 	private static final boolean allowEnchantmentsOnCrossbow = true;
 	private static final boolean allowEnchantmentsOnNetheriteCrossbow = true;
-	private static final boolean modifyMultiShotEnchantment = true;
+	private static final int modifyMultiShotEnchantment = 3;
 	
 	public static final ConfigValue<Boolean> coEnchCrossbow;
 	public static final ConfigValue<Boolean> coEnchNetheriteCrossbow;
-	public static final ConfigValue<Boolean> coModMultishot;
+	public static final ConfigValue<Integer> coModMultishot;
 	
 	public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 	public static final ForgeConfigSpec SPEC;
@@ -21,7 +21,7 @@ public class CrossbowverhaulConfigHolder {
 		BUILDER.push("co-item");
 		
 			coEnchCrossbow = BUILDER
-					.comment("Enable enchantments on all crossbow type weapons")
+					.comment("Enable enchantments on the standard crossbow")
 					.define("Enable enchants on crossbow", allowEnchantmentsOnCrossbow);
 			
 			coEnchNetheriteCrossbow = BUILDER
@@ -33,8 +33,8 @@ public class CrossbowverhaulConfigHolder {
 		BUILDER.push("co-ench");
 		
 			coModMultishot = BUILDER
-					.comment("Allows multishot to go up to five")
-					.define("Modify multishot enchantment", modifyMultiShotEnchantment);
+					.comment("Maximum level of multishot. Resulting projctiles: (<value> * 2) + 1. For vanilla values, set it to 1")
+					.defineInRange("Modify multishot enchantment", modifyMultiShotEnchantment, 1, Integer.MAX_VALUE);
 		
 		BUILDER.pop();
 		
