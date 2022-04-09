@@ -10,7 +10,7 @@ public class MultishotEnchantment extends net.minecraft.enchantment.MultishotEnc
 	
 	@Override
 	public int getMaxLevel() {
-		return CrossbowverhaulConfigHolder.coModMultishot.get();
+		return CrossbowverhaulConfigHolder.coModMultishot.get().intValue();
 	}
 
 }
