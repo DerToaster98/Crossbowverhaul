@@ -24,12 +24,12 @@ public class ItemCrossbowNetherite extends ItemCrossbow implements IModifiedCros
 	
 	@Override
 	public boolean isEnchantable(ItemStack p_41456_) {
-		return this.parentClassIsEnchantable(p_41456_) && CrossbowverhaulConfigHolder.coEnchNetheriteCrossbow.get();
+		return this.parentClassIsEnchantable(p_41456_) && CrossbowverhaulConfigHolder.coEnchNetheriteCrossbow.get().booleanValue();
 	}
 	
 	@Override
 	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-		return this.parentClassIsBookEnchantable(stack, book) && CrossbowverhaulConfigHolder.coEnchNetheriteCrossbow.get();
+		return this.parentClassIsBookEnchantable(stack, book) && CrossbowverhaulConfigHolder.coEnchNetheriteCrossbow.get().booleanValue();
 	}
 
 	public ItemCrossbowNetherite(Properties properties) {
@@ -38,18 +38,18 @@ public class ItemCrossbowNetherite extends ItemCrossbow implements IModifiedCros
 
 	@Override
 	public int getDefaultProjectileRange() {
-		return (int)(CrossbowverhaulConfigHolder.coModNetheriteCrossbowProjectileRange.get() * (super.getDefaultProjectileRange() / CrossbowverhaulConfigHolder.coModCrossbowProjectileRange.get()));
+		return (int)(CrossbowverhaulConfigHolder.coModNetheriteCrossbowProjectileRange.get().intValue() * (super.getDefaultProjectileRange() / CrossbowverhaulConfigHolder.coModCrossbowProjectileRange.get()));
 	}
 	
 	@Override
 	public float getProjectileSpeedModifier() {
-		return CrossbowverhaulConfigHolder.coModNetheriteCrossbowProjectileSpeed.get() * (super.getProjectileSpeedModifier() / CrossbowverhaulConfigHolder.coModCrossbowProjectileSpeed.get());
+		return CrossbowverhaulConfigHolder.coModNetheriteCrossbowProjectileSpeed.get().floatValue() * (super.getProjectileSpeedModifier() / CrossbowverhaulConfigHolder.coModCrossbowProjectileSpeed.get().floatValue());
 	}
 
 	// Override charging duration
 	@Override
 	public int getMaxChargeTime() {
-		return (int)(CrossbowverhaulConfigHolder.coModNetheriteCrossbowChargeTime.get() * (super.getMaxChargeTime() / CrossbowverhaulConfigHolder.coModCrossbowChargeTime.get()));
+		return CrossbowverhaulConfigHolder.coModNetheriteCrossbowChargeTime.get().intValue();
 	}
 
 }

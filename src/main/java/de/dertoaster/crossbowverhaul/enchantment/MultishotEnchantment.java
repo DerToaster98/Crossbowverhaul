@@ -12,7 +12,7 @@ public class MultishotEnchantment extends MultiShotEnchantment {
 	
 	@Override
 	public int getMaxLevel() {
-		return CrossbowverhaulConfigHolder.coModMultishot.get();
+		return CrossbowverhaulConfigHolder.coModMultishot.get().intValue();
 	}
 
 }

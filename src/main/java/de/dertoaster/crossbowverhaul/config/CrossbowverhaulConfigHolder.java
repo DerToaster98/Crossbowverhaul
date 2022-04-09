@@ -11,10 +11,10 @@ public class CrossbowverhaulConfigHolder {
 	private static final int defaultCrossbowDurability = 512;
 	private static final int defaultNetheriteCrossbowDurability = 1024;
 	private static final int defaultModifyMultiShotEnchantment = 3;
-	private static final double defaultModCrossbowChargeTime = 2.0D;
-	private static final double defaultModNetheriteCrossbowChargeTime = 3.0D;
-	private static final float defaultModCrossbowProjectileSpeed = 1.0F;
-	private static final float defaultModNetheriteCrossbowProjectileSpeed = 1.5F;
+	private static final Integer defaultModCrossbowChargeTime = 50;
+	private static final Integer defaultModNetheriteCrossbowChargeTime = 75;
+	private static final double defaultModCrossbowProjectileSpeed = 1.0F;
+	private static final double defaultModNetheriteCrossbowProjectileSpeed = 1.5F;
 	private static final double defaultModCrossbowProjectileRange = 1.0D;
 	private static final double defaultModNetheriteCrossbowProjectileRange = 1.5D;
 	
@@ -24,11 +24,11 @@ public class CrossbowverhaulConfigHolder {
 	public static final ConfigValue<Integer> coModMultishot;
 	public static final ConfigValue<Integer> coCrossbowDurability;
 	public static final ConfigValue<Integer> coNetheriteCrossbowDurability;
-	public static final ConfigValue<Double> coModCrossbowChargeTime;
-	public static final ConfigValue<Double> coModNetheriteCrossbowChargeTime;
-	public static final ConfigValue<Float> coModCrossbowProjectileSpeed;
+	public static final ConfigValue<Integer> coModCrossbowChargeTime;
+	public static final ConfigValue<Integer> coModNetheriteCrossbowChargeTime;
+	public static final ConfigValue<Double> coModCrossbowProjectileSpeed;
 	public static final ConfigValue<Double> coModCrossbowProjectileRange;
-	public static final ConfigValue<Float> coModNetheriteCrossbowProjectileSpeed;
+	public static final ConfigValue<Double> coModNetheriteCrossbowProjectileSpeed;
 	public static final ConfigValue<Double> coModNetheriteCrossbowProjectileRange;
 	
 	public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
@@ -63,20 +63,20 @@ public class CrossbowverhaulConfigHolder {
 					.define("Explosive bolts on non-netherite crossbow", defaultAllowExplosiveBoltsOnNormalCrossbow);
 			
 			coModCrossbowChargeTime = BUILDER
-					.comment("Multiplier for the standard crossbow's charge time, base charge time is 25 ticks")
-					.defineInRange("Crossbow charge-time modifier", defaultModCrossbowChargeTime, 0.0D, Double.MAX_VALUE);
+					.comment("Standard crossbow charge time, vanilla charge time is 25 ticks")
+					.defineInRange("Crossbow charge-time modifier", defaultModCrossbowChargeTime, 1, Integer.MAX_VALUE);
 			
 			coModNetheriteCrossbowChargeTime = BUILDER
-					.comment("Multiplier for the netherite crossbow's charge time, base charge time is 25 ticks")
-					.defineInRange("Netherite Crossbow charge-time modifier", defaultModNetheriteCrossbowChargeTime, 0.0D, Double.MAX_VALUE);
+					.comment("Netherite crossbow charge time, vanilla charge time is 25 ticks")
+					.defineInRange("Netherite Crossbow charge-time modifier", defaultModNetheriteCrossbowChargeTime, 1, Integer.MAX_VALUE);
 			
 			coModCrossbowProjectileSpeed = BUILDER
 					.comment("Multiplier for the projectile speed for projectiles shot from the standard crossbow")
-					.defineInRange("Crossbow projectile speed multiplier", defaultModCrossbowProjectileSpeed, 1.0F, Float.MAX_VALUE, Float.class);
+					.defineInRange("Crossbow projectile speed multiplier", defaultModCrossbowProjectileSpeed, 1.0D, Float.MAX_VALUE);
 			
 			coModNetheriteCrossbowProjectileSpeed = BUILDER
 					.comment("Multiplier for the projectile speed for projectiles shot from the netherite crossbow")
-					.defineInRange("Netherite Crossbow projectile speed multiplier", defaultModNetheriteCrossbowProjectileSpeed, 1.0F, Float.MAX_VALUE, Float.class);
+					.defineInRange("Netherite Crossbow projectile speed multiplier", defaultModNetheriteCrossbowProjectileSpeed, 1.0D, Float.MAX_VALUE);
 			
 			coModCrossbowProjectileRange = BUILDER
 					.comment("Multiplier for the projectile rabge for projectiles shot from the standard crossbow")

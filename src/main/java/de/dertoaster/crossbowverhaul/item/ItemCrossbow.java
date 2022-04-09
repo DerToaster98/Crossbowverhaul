@@ -25,7 +25,7 @@ public class ItemCrossbow extends CrossbowItem implements Vanishable, IModifiedC
 	};
 	
 	protected static final Predicate<ItemStack> PREDICATE_BOLTS_ONLY_NO_EXPLOSIVE = (itemstack) -> {
-		return itemstack.getItem() instanceof ItemBolt && (CrossbowverhaulConfigHolder.coAllowExplosiveBoltsOnNormalCrossbow.get() || !(itemstack.getItem() instanceof ItemBoltExplosive));
+		return itemstack.getItem() instanceof ItemBolt && (CrossbowverhaulConfigHolder.coAllowExplosiveBoltsOnNormalCrossbow.get().booleanValue() || !(itemstack.getItem() instanceof ItemBoltExplosive));
 	};
 
 	//This only checks the items in off and main hand
@@ -140,17 +140,18 @@ public class ItemCrossbow extends CrossbowItem implements Vanishable, IModifiedC
 	//Override charging duration
 	@Override
 	public int getMaxChargeTime() {
-		return (int)(CrossbowverhaulConfigHolder.coModCrossbowChargeTime.get() * IModifiedCrossbowMethod.super.getMaxChargeTime());
+		return CrossbowverhaulConfigHolder.coModCrossbowChargeTime.get().intValue();
 	}
 	
 	@Override
 	public int getDefaultProjectileRange() {
-		return (int)(CrossbowverhaulConfigHolder.coModCrossbowProjectileRange.get() * super.getDefaultProjectileRange());
+		return (int)(CrossbowverhaulConfigHolder.coModCrossbowProjectileRange.get().doubleValue() * super.getDefaultProjectileRange());
 	}
 	
 	@Override
 	public float getProjectileSpeedModifier() {
-		return CrossbowverhaulConfigHolder.coModCrossbowProjectileSpeed.get() * IModifiedCrossbowMethod.super.getProjectileSpeedModifier();
+		float f = CrossbowverhaulConfigHolder.coModCrossbowProjectileSpeed.get().floatValue(); 
+		return f * IModifiedCrossbowMethod.super.getProjectileSpeedModifier();
 	}
 	
 	protected boolean parentClassIsEnchantable(ItemStack stack) {
@@ -163,12 +164,12 @@ public class ItemCrossbow extends CrossbowItem implements Vanishable, IModifiedC
 	
 	@Override
 	public boolean isEnchantable(ItemStack p_41456_) {
-		return this.parentClassIsEnchantable(p_41456_) && CrossbowverhaulConfigHolder.coEnchCrossbow.get();
+		return this.parentClassIsEnchantable(p_41456_) && CrossbowverhaulConfigHolder.coEnchCrossbow.get().booleanValue();
 	}
 	
 	@Override
 	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-		return this.parentClassIsBookEnchantable(stack, book) && CrossbowverhaulConfigHolder.coEnchCrossbow.get();
+		return this.parentClassIsBookEnchantable(stack, book) && CrossbowverhaulConfigHolder.coEnchCrossbow.get().booleanValue();
 	}
 	
 }
