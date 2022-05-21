@@ -15,8 +15,7 @@ public class ItemBolt extends AbstractItemBolt {
 
 	@Override
 	public AbstractArrow createArrow(Level world, ItemStack arrowItem, LivingEntity shooter) {
-		ProjectileBolt bolt = new ProjectileBolt(world, shooter);
-		bolt.setTier(this.tier);
+		ProjectileBolt bolt = new ProjectileBolt(world, shooter, this.tier);
 		return bolt;
 	}
 

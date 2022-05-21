@@ -47,25 +47,26 @@ public class ProjectileBolt extends AbstractArrow {
 		super(type, shooter, world);
 	}
 	
+	public ProjectileBolt(Level world, LivingEntity shooter, Tier tier) {
+		this(world, shooter);
+		this.setTier(tier);
+	}
+
 	public void setTier(Tier tier) {
-		if(this.level.isClientSide()) {
-			return;
-		}
 		int tierID = Tiers.values().length;
 		for(Tiers et : Tiers.values()) {
-			if((Tier)et == this.getTier()) {
+			if(et == (Tiers)tier) {
 				tierID = et.ordinal();
 				break;
 			}
 		}
-		this.entityData.set(ID_TIER, tierID);
-		
+		this.getEntityData().set(ID_TIER, tierID);
 		//recalculate our basse damage
 		this.setBaseDamage(this.getBaseDamage());
 	}
 
 	public int getSynchedTierID() {
-		return this.entityData.get(ID_TIER);
+		return this.getEntityData().get(ID_TIER);
 	}
 	
 	@Override
@@ -94,9 +95,9 @@ public class ProjectileBolt extends AbstractArrow {
 	
 	@Nullable
 	public Tier getTier() {
-		final int tierIdx = this.entityData.get(ID_TIER);
+		final int tierIdx = this.getSynchedTierID();
 		if (tierIdx >= Tiers.values().length) {
-			return null;
+			return Tiers.DIAMOND;
 		}
 		return Tiers.values()[tierIdx];
 	}
@@ -142,7 +143,6 @@ public class ProjectileBolt extends AbstractArrow {
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
-		
 		this.setTier(Tiers.valueOf(nbt.getString("bolt_tier")));
 	}
 	
