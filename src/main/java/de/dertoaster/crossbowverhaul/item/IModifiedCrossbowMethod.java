@@ -9,6 +9,7 @@ import com.mojang.math.Vector3f;
 import de.dertoaster.crossbowverhaul.init.ModItems;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.CrossbowAttackMob;
@@ -31,16 +32,16 @@ public interface IModifiedCrossbowMethod {
 		return 22.5F;
 	}
 
-	public default float[] modifiedGetShotPitches(Random rnd, final int multiShotLevel) {
+	public default float[] modifiedGetShotPitches(RandomSource randomSource, final int multiShotLevel) {
 		if (multiShotLevel <= 0) {
 			return new float[] { 1.0F };
 		}
 		float[] result = new float[multiShotLevel * 2 + 1];
 
 		for (int i = 0; i < multiShotLevel; i++) {
-			boolean currentFlag = rnd.nextBoolean();
-			result[i] = CrossbowItem.getRandomShotPitch(currentFlag, rnd);
-			result[result.length - (i + 1)] = CrossbowItem.getRandomShotPitch(!currentFlag, rnd);
+			boolean currentFlag = randomSource.nextBoolean();
+			result[i] = CrossbowItem.getRandomShotPitch(currentFlag, randomSource);
+			result[result.length - (i + 1)] = CrossbowItem.getRandomShotPitch(!currentFlag, randomSource);
 		}
 		result[multiShotLevel] = 1.0F;
 
