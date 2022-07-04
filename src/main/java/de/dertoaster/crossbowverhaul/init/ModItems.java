@@ -35,9 +35,9 @@ public class ModItems {
 	public static final RegistryObject<Item> ITEM_BOLT_EXPLOSIVE = ITEMS.register("bolt_explosive", () -> new ItemBoltExplosive(new Properties().tab(CreativeModeTab.TAB_COMBAT).stacksTo(64).fireResistant()));
 
 	//Netherite crossbow
-	public static final RegistryObject<Item> ITEM_CROSSBOW_NETHERITE = ITEMS.register("crossbow_netherite", () -> (new ItemCrossbowNetherite(new Item.Properties().stacksTo(1).tab(CreativeModeTab.TAB_COMBAT).durability(CrossbowverhaulConfigHolder.coNetheriteCrossbowDurability.get()).fireResistant())));
+	public static final RegistryObject<Item> ITEM_CROSSBOW_NETHERITE = ITEMS.register("crossbow_netherite", () -> (new ItemCrossbowNetherite(new Item.Properties().stacksTo(1).tab(CreativeModeTab.TAB_COMBAT).durability(/*CrossbowverhaulConfigHolder.CONFIG.coNetheriteCrossbowDurability.get()*/1024).fireResistant())));
 	
 	//now, override the crossbow
-	public static final RegistryObject<Item> ITEM_CROSSBOW = VANILLA_ITEMS.register("crossbow", () -> (new ItemCrossbow(new Item.Properties().stacksTo(1).tab(CreativeModeTab.TAB_COMBAT).durability(CrossbowverhaulConfigHolder.coCrossbowDurability.get()))));
+	public static final RegistryObject<Item> ITEM_CROSSBOW = VANILLA_ITEMS.register("crossbow", () -> (new ItemCrossbow(new Item.Properties().stacksTo(1).tab(CreativeModeTab.TAB_COMBAT).durability(/*CrossbowverhaulConfigHolder.CONFIG.coCrossbowDurability.get()*/512))));
 
 }
