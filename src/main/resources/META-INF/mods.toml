@@ -42,10 +42,6 @@ This is a replacer for the vanilla crossbow
     modId="minecraft"
     mandatory=true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="[1.18,1.19)"
+    versionRange="[1.19,1.19.1)"
     ordering="AFTER"
     side="BOTH"
-[[dependencies.crossbowverhaul]]
-    modId="mixinbootstrap"
-	mandatory=false
-	side="BOTH"
