@@ -1,6 +1,6 @@
 package de.dertoaster.crossbowverhaul.enchantment;
 
-import de.dertoaster.crossbowverhaul.config.CrossbowverhaulConfigHolder;
+import de.dertoaster.crossbowverhaul.config.COConfig;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.MultiShotEnchantment;
 
@@ -12,7 +12,7 @@ public class MultishotEnchantment extends MultiShotEnchantment {
 	
 	@Override
 	public int getMaxLevel() {
-		return CrossbowverhaulConfigHolder.CONFIG.coModMultishot.get().intValue();
+		return COConfig.CONFIG.coModMultishot.get().intValue();
 	}
 
 }

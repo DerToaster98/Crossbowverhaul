@@ -3,7 +3,7 @@ package de.dertoaster.crossbowverhaul;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import de.dertoaster.crossbowverhaul.config.CrossbowverhaulConfigHolder;
+import de.dertoaster.crossbowverhaul.config.COConfig;
 import de.dertoaster.crossbowverhaul.init.ModEnchantments;
 import de.dertoaster.crossbowverhaul.init.ModEntityTypes;
 import de.dertoaster.crossbowverhaul.init.ModItemProperties;
@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(CrossbowverhaulMod.MODID)
@@ -31,7 +32,9 @@ public class CrossbowverhaulMod
     	IEventBus modbus = FMLJavaModLoadingContext.get().getModEventBus();
     	
     	//Register config
-    	ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, CrossbowverhaulConfigHolder.CONFIG_SPEC, "co-config.toml");
+    	ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, COConfig.CONFIG_SPEC, "co-config.toml");
+    	COConfig.loadConfig(COConfig.CONFIG_SPEC,
+				FMLPaths.CONFIGDIR.get().resolve("co-config.toml").toString());
     	
     	//Register items
     	ModItems.registerToEventBus(modbus);

@@ -1,11 +1,16 @@
 package de.dertoaster.crossbowverhaul.config;
 
+import java.io.File;
+
 import org.apache.commons.lang3.tuple.Pair;
+
+import com.electronwill.nightconfig.core.file.CommentedFileConfig;
+import com.electronwill.nightconfig.core.io.WritingMode;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 
-public class CrossbowverhaulConfigHolder {
+public class COConfig {
 	
 	public static final CrossbowverhaulConfig CONFIG;
 	public static final ForgeConfigSpec CONFIG_SPEC;
@@ -13,6 +18,13 @@ public class CrossbowverhaulConfigHolder {
 		final Pair<CrossbowverhaulConfig, ForgeConfigSpec> serverSpecPair = new ForgeConfigSpec.Builder().configure(CrossbowverhaulConfig::new);
 		CONFIG = serverSpecPair.getLeft();
 		CONFIG_SPEC = serverSpecPair.getRight();
+	}
+	
+	public static void loadConfig(ForgeConfigSpec config, String path) {
+		final CommentedFileConfig file = CommentedFileConfig.builder(new File(path)).sync().autosave()
+				.writingMode(WritingMode.REPLACE).build();
+		file.load();
+		config.setConfig(file);
 	}
 
 	public static class CrossbowverhaulConfig {

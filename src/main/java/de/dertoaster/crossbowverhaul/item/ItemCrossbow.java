@@ -3,7 +3,7 @@ package de.dertoaster.crossbowverhaul.item;
 import java.util.List;
 import java.util.function.Predicate;
 
-import de.dertoaster.crossbowverhaul.config.CrossbowverhaulConfigHolder;
+import de.dertoaster.crossbowverhaul.config.COConfig;
 import de.dertoaster.crossbowverhaul.init.ModItems;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -25,7 +25,7 @@ public class ItemCrossbow extends CrossbowItem implements Vanishable, IModifiedC
 	};
 	
 	protected static final Predicate<ItemStack> PREDICATE_BOLTS_ONLY_NO_EXPLOSIVE = (itemstack) -> {
-		return itemstack.getItem() instanceof ItemBolt && (CrossbowverhaulConfigHolder.CONFIG.coAllowExplosiveBoltsOnNormalCrossbow.get().booleanValue() || !(itemstack.getItem() instanceof ItemBoltExplosive));
+		return itemstack.getItem() instanceof ItemBolt && (COConfig.CONFIG.coAllowExplosiveBoltsOnNormalCrossbow.get().booleanValue() || !(itemstack.getItem() instanceof ItemBoltExplosive));
 	};
 
 	//This only checks the items in off and main hand
@@ -140,17 +140,17 @@ public class ItemCrossbow extends CrossbowItem implements Vanishable, IModifiedC
 	//Override charging duration
 	@Override
 	public int getMaxChargeTime() {
-		return CrossbowverhaulConfigHolder.CONFIG.coModCrossbowChargeTime.get().intValue();
+		return COConfig.CONFIG.coModCrossbowChargeTime.get().intValue();
 	}
 	
 	@Override
 	public int getDefaultProjectileRange() {
-		return (int)(CrossbowverhaulConfigHolder.CONFIG.coModCrossbowProjectileRange.get().doubleValue() * super.getDefaultProjectileRange());
+		return (int)(COConfig.CONFIG.coModCrossbowProjectileRange.get().doubleValue() * super.getDefaultProjectileRange());
 	}
 	
 	@Override
 	public float getProjectileSpeedModifier() {
-		float f = CrossbowverhaulConfigHolder.CONFIG.coModCrossbowProjectileSpeed.get().floatValue(); 
+		float f = COConfig.CONFIG.coModCrossbowProjectileSpeed.get().floatValue(); 
 		return f * IModifiedCrossbowMethod.super.getProjectileSpeedModifier();
 	}
 	
@@ -164,12 +164,12 @@ public class ItemCrossbow extends CrossbowItem implements Vanishable, IModifiedC
 	
 	@Override
 	public boolean isEnchantable(ItemStack p_41456_) {
-		return this.parentClassIsEnchantable(p_41456_) && CrossbowverhaulConfigHolder.CONFIG.coEnchCrossbow.get().booleanValue();
+		return this.parentClassIsEnchantable(p_41456_) && COConfig.CONFIG.coEnchCrossbow.get().booleanValue();
 	}
 	
 	@Override
 	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-		return this.parentClassIsBookEnchantable(stack, book) && CrossbowverhaulConfigHolder.CONFIG.coEnchCrossbow.get().booleanValue();
+		return this.parentClassIsBookEnchantable(stack, book) && COConfig.CONFIG.coEnchCrossbow.get().booleanValue();
 	}
 	
 }
