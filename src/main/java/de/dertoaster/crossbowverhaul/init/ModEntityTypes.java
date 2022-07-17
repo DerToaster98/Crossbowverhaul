@@ -12,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModEntityTypes {
 
-	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, CrossbowverhaulMod.MODID);
+	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, CrossbowverhaulMod.MODID);
 
 	public static final RegistryObject<EntityType<ProjectileBolt>> BOLT = ENTITY_TYPES.register("bolt", () -> EntityType.Builder.<ProjectileBolt>of(ProjectileBolt::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4)
 			.updateInterval(20).build(new ResourceLocation(CrossbowverhaulMod.MODID, "bolt").toString()));
