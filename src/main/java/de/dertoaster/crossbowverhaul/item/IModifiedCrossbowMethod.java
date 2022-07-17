@@ -1,7 +1,6 @@
 package de.dertoaster.crossbowverhaul.item;
 
 import java.util.List;
-import java.util.Random;
 
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
@@ -20,7 +19,6 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -116,7 +114,7 @@ public interface IModifiedCrossbowMethod {
 	}
 
 	public default int modifiedGetChargeDuration(ItemStack crossbow) {
-		int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.QUICK_CHARGE, crossbow);
+		int i = crossbow.getEnchantmentLevel(Enchantments.QUICK_CHARGE);
 		return i == 0 ? this.getMaxChargeTime() : this.getMaxChargeTime() - this.getChargeTimeReductionPerQuickChargeLevel() * i;
 	}
 

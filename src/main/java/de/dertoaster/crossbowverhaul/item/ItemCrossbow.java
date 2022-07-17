@@ -14,7 +14,6 @@ import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Vanishable;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
@@ -62,9 +61,9 @@ public class ItemCrossbow extends CrossbowItem implements Vanishable, IModifiedC
 
 	// Attention: this actually differs from vanilla!
 	protected boolean tryLoadProjectiles(LivingEntity shooter, ItemStack weaponItem) {
-		int multishotEnchantLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MULTISHOT, weaponItem);
+		int multishotEnchantLevel = weaponItem.getEnchantmentLevel(Enchantments.MULTISHOT);
 		int actualShotCount = 1 + (2 * multishotEnchantLevel);
-		boolean flag = shooter instanceof Player && ((Player) shooter).getAbilities().instabuild;
+		boolean flag = shooter instanceof Player && (((Player) shooter).getAbilities().instabuild || weaponItem.getEnchantmentLevel(Enchantments.INFINITY_ARROWS) > 0);
 		ItemStack itemstack = shooter.getProjectile(weaponItem);
 		ItemStack itemStackForAdditionalProjectiles = itemstack.copy();
 
