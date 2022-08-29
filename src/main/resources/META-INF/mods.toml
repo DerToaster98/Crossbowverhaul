@@ -32,7 +32,7 @@ This is a replacer for the vanilla crossbow
     # Does this dependency have to exist - if not, ordering below must be specified
     mandatory=true #mandatory
     # The version range of the dependency
-    versionRange="[41,)" #mandatory
+    versionRange="[43,)" #mandatory
     # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
     ordering="AFTER"
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
@@ -42,6 +42,6 @@ This is a replacer for the vanilla crossbow
     modId="minecraft"
     mandatory=true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="[1.19,1.19.1)"
+    versionRange="[1.19.2,1.19.3)"
     ordering="AFTER"
     side="BOTH"
