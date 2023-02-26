@@ -1,5 +1,6 @@
 package de.dertoaster.crossbowverhaul.enchantment;
 
+import de.dertoaster.crossbowverhaul.config.CrossbowverhaulConfigHolder;
 import net.minecraft.inventory.EquipmentSlotType;
 
 public class MultishotEnchantment extends net.minecraft.enchantment.MultishotEnchantment {

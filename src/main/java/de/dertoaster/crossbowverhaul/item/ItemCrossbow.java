@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import de.dertoaster.crossbowverhaul.config.CrossbowverhaulConfigHolder;
 import de.dertoaster.crossbowverhaul.init.ModItems;
-
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.IVanishable;
@@ -63,9 +62,9 @@ public class ItemCrossbow extends CrossbowItem implements IVanishable, IModified
 
 	// Attention: this actually differs from vanilla!
 	protected boolean tryLoadProjectiles(LivingEntity shooter, ItemStack weaponItem) {
-		int multishotEnchantLevel = weaponItem.getEnchantmentLevel(Enchantments.MULTISHOT);
+		int multishotEnchantLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MULTISHOT, weaponItem);
 		int actualShotCount = 1 + (2 * multishotEnchantLevel);
-		boolean flag = shooter instanceof PlayerEntity && (((PlayerEntity) shooter).abilities.instabuild|| weaponItem.getEnchantmentLevel(Enchantments.INFINITY_ARROWS) > 0);
+		boolean flag = shooter instanceof PlayerEntity && (((PlayerEntity) shooter).abilities.instabuild|| EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, weaponItem) > 0);
 
 		ItemStack itemstack = shooter.getProjectile(weaponItem);
 		ItemStack itemStackForAdditionalProjectiles = itemstack.copy();

@@ -1,16 +1,15 @@
 package de.dertoaster.crossbowverhaul.item;
 
 import de.dertoaster.crossbowverhaul.entity.projectile.ProjectileBolt;
-
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.level.Level;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class ItemBolt extends AbstractItemBolt {
 
-	public ItemBolt(Properties properties, final Tier tier) {
+	public ItemBolt(Properties properties, final IItemTier tier) {
 		super(properties, tier);
 	}
 

@@ -2,6 +2,7 @@ package de.dertoaster.crossbowverhaul.item;
 
 import java.util.function.Predicate;
 
+import de.dertoaster.crossbowverhaul.config.CrossbowverhaulConfigHolder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 

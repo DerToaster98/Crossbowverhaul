@@ -4,10 +4,11 @@ import javax.annotation.Nullable;
 
 import de.dertoaster.crossbowverhaul.init.ModEntityTypes;
 import de.dertoaster.crossbowverhaul.init.ModItems;
-
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTier;
 import net.minecraft.nbt.CompoundNBT;
@@ -15,6 +16,7 @@ import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
@@ -45,15 +47,15 @@ public class ProjectileBolt extends AbstractArrowEntity {
 		super(type, shooter, world);
 	}
 	
-	public ProjectileBolt(Level world, LivingEntity shooter, Tier tier) {
+	public ProjectileBolt(World world, LivingEntity shooter, IItemTier tier) {
 		this(world, shooter);
 		this.setTier(tier);
 	}
 
-	public void setTier(Tier tier) {
-		int tierID = Tiers.values().length;
-		for(Tiers et : Tiers.values()) {
-			if(et == (Tiers)tier) {
+	public void setTier(IItemTier tier) {
+		int tierID = ItemTier.values().length;
+		for(ItemTier et : ItemTier.values()) {
+			if(et == (ItemTier)tier) {
 				tierID = et.ordinal();
 				break;
 			}
@@ -69,9 +71,9 @@ public class ProjectileBolt extends AbstractArrowEntity {
 	
 	@Override
 	protected ItemStack getPickupItem() {
-		Tiers etier = Tiers.WOOD;
-		for(Tiers et : Tiers.values()) {
-			if((Tier)et == this.getTier()) {
+		ItemTier etier = ItemTier.WOOD;
+		for(ItemTier et : ItemTier.values()) {
+			if((IItemTier)et == this.getTier()) {
 				etier = et;
 				break;
 			}
@@ -92,25 +94,25 @@ public class ProjectileBolt extends AbstractArrowEntity {
 	}
 	
 	@Nullable
-	public Tier getTier() {
+	public IItemTier getTier() {
 		final int tierIdx = this.getSynchedTierID();
-		if (tierIdx >= Tiers.values().length) {
-			return Tiers.DIAMOND;
+		if (tierIdx >= ItemTier.values().length) {
+			return ItemTier.DIAMOND;
 		}
 		return ItemTier.values()[tierIdx];
 	}
 
-	public static double getAdditionalDamageOf(Tier tier) {
-		if(tier == (Tier)Tiers.GOLD) {
+	public static double getAdditionalDamageOf(IItemTier tier) {
+		if(tier == (IItemTier)ItemTier.GOLD) {
 			return 0.5;
 		}
-		if(tier == (Tier)Tiers.IRON) {
+		if(tier == (IItemTier)ItemTier.IRON) {
 			return 1.0;
 		}
-		if(tier == (Tier)Tiers.DIAMOND) {
+		if(tier == (IItemTier)ItemTier.DIAMOND) {
 			return 3.0;
 		}
-		if(tier == (Tier)Tiers.NETHERITE) {
+		if(tier == (IItemTier)ItemTier.NETHERITE) {
 			return 4.0;
 		}
 		return tier.getAttackDamageBonus();
@@ -119,7 +121,7 @@ public class ProjectileBolt extends AbstractArrowEntity {
 	@Override
 	public void setBaseDamage(double newValue) {
 		//DONE: Add the damage value of the tier to it!
-		final Tier myTier = this.getTier();
+		final IItemTier myTier = this.getTier();
 		double addDmg = getAdditionalDamageOf(myTier);
 		
 		super.setBaseDamage(newValue + addDmg);
@@ -152,7 +154,7 @@ public class ProjectileBolt extends AbstractArrowEntity {
 	}
 	
 	@Override
-	protected void onHitEntity(EntityHitResult pResult) {
+	protected void onHitEntity(EntityRayTraceResult pResult) {
 		Entity ent = pResult.getEntity();
 		if(ent != null) {
 			ent.invulnerableTime = 0;
