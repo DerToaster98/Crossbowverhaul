@@ -6,6 +6,7 @@ import de.dertoaster.crossbowverhaul.init.ModEntityTypes;
 import de.dertoaster.crossbowverhaul.init.ModItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -148,7 +149,7 @@ public class ProjectileBolt extends AbstractArrow {
 	
 	//Why tf do i need this?!
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 	

@@ -2,8 +2,8 @@ package de.dertoaster.crossbowverhaul.item;
 
 import java.util.List;
 
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import de.dertoaster.crossbowverhaul.init.ModItems;
 import net.minecraft.sounds.SoundEvents;
@@ -97,11 +97,10 @@ public interface IModifiedCrossbowMethod {
 				CrossbowAttackMob icrossbowuser = (CrossbowAttackMob) shooter;
 				icrossbowuser.shootCrossbowProjectile(icrossbowuser.getTarget(), crossbow, projectileentity, simulated);
 			} else {
-				Vec3 vector3d1 = shooter.getUpVector(1.0F);
-				Quaternion quaternion = new Quaternion(new Vector3f(vector3d1), simulated, true);
-				Vec3 vector3d = shooter.getViewVector(1.0F);
-				Vector3f vector3f = new Vector3f(vector3d);
-				vector3f.transform(quaternion);
+				 Vec3 vec31 = shooter.getUpVector(1.0F);
+	            Quaternionf quaternionf = (new Quaternionf()).setAngleAxis((double)(simulated * ((float)Math.PI / 180F)), vec31.x, vec31.y, vec31.z);
+	            Vec3 vec3 = shooter.getViewVector(1.0F);
+	            Vector3f vector3f = vec3.toVector3f().rotate(quaternionf);
 				projectileentity.shoot((double) vector3f.x(), (double) vector3f.y(), (double) vector3f.z(), speed * this.getProjectileSpeedModifier(), divergence);
 			}
 
