@@ -4,7 +4,9 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "crossbowverhaul.refmap.json",
   "mixins": [
-    "MixinCrossbowItem"
+    "MixinCrossbowItem",
+	"accessor.AccessorLootTable",
+	"accessor.AccessorLootTableBuilder"
   ],
   "minVersion": "0.8",
   "client": [

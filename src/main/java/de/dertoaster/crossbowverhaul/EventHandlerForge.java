@@ -1,5 +1,7 @@
 package de.dertoaster.crossbowverhaul;
 
+import de.dertoaster.crossbowverhaul.mixin.accessor.AccessorLootTable;
+import de.dertoaster.crossbowverhaul.mixin.accessor.AccessorLootTableBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -27,8 +29,8 @@ public class EventHandlerForge {
 						)
 					)
 				); 
-			for(LootPool pool : lt.pools) {
-				builder.pools.add(pool);
+			for(LootPool pool : ((AccessorLootTable)lt).getPools()) {
+				((AccessorLootTableBuilder)builder).getPools().add(pool);
 			}
 			event.setTable(
 				builder.build()
@@ -44,8 +46,8 @@ public class EventHandlerForge {
 						)
 					)
 				); 
-			for(LootPool pool : lt.pools) {
-				builder.pools.add(pool);
+			for(LootPool pool : ((AccessorLootTable)lt).getPools()) {
+				((AccessorLootTableBuilder)builder).getPools().add(pool);
 			}
 			event.setTable(
 				builder.build()

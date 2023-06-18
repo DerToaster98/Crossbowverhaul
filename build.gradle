@@ -15,7 +15,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Mojang ships Java
 minecraft {
     mappings channel: "${mappingsChannel}", version: "${mappingsVersion}"
     
-    accessTransformer = 'src/main/resources/META-INF/accesstransformer.cfg'
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {
@@ -80,46 +80,6 @@ mixin {
 	config "crossbowverhaul.mixins.json"
 	
 	debug.export = true
-}
-
-// Generate a fixed tsrg file after generating the default tsrg file
-createMcpToSrg {
-    outputs.upToDateWhen {false}
-    doLast {
-        fixFG5TsrgForMixinAP(output.get().asFile, file("${buildDir}/fixMcpToSrg/output.tsrg"))
-    }
-}
-
-// Tell mixin to use the fixed TSRG file
-mixin {
-    reobfSrgFile = file("${buildDir}/fixMcpToSrg/output.tsrg")
-}
-
-// Function that actually fixes the TSRG file
-static def fixFG5TsrgForMixinAP(File inFile, File outFile) {
-    // Make directory if needed
-    outFile.parentFile.mkdirs()
-
-    try (Scanner scanner = new Scanner(inFile); PrintWriter out = new PrintWriter(outFile)) {
-        boolean firstLine = true
-        while (scanner.hasNextLine()) {
-            String next = scanner.nextLine()
-
-            // Skip first 'tsrg left right' header line
-            if (firstLine) {
-                firstLine = false
-                continue
-            }
-
-            // Skip 'static' indicators
-            if (next.trim() == "static") {
-                continue
-            }
-
-            // Export line otherwise
-            out.println(next)
-        }
-    }
 }
 
 jar.finalizedBy('reobfJar') 
