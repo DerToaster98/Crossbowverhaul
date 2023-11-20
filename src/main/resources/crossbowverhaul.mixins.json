@@ -8,9 +8,5 @@
 	"accessor.AccessorLootTable",
 	"accessor.AccessorLootTableBuilder"
   ],
-  "minVersion": "0.8",
-  "client": [
-    "MixinItemInHandRenderer",
-	"MixinPlayerRenderer"
-  ]
+  "minVersion": "0.8"
 }
