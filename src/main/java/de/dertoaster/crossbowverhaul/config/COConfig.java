@@ -1,30 +1,27 @@
 package de.dertoaster.crossbowverhaul.config;
 
-import java.io.File;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import org.apache.commons.lang3.tuple.Pair;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
+import java.io.File;
 
 public class COConfig {
 	
 	public static final CrossbowverhaulConfig CONFIG;
-	public static final ForgeConfigSpec CONFIG_SPEC;
+	public static final ModConfigSpec CONFIG_SPEC;
 	static {
-		final Pair<CrossbowverhaulConfig, ForgeConfigSpec> serverSpecPair = new ForgeConfigSpec.Builder().configure(CrossbowverhaulConfig::new);
+		final Pair<CrossbowverhaulConfig, ModConfigSpec> serverSpecPair = new ModConfigSpec.Builder().configure(CrossbowverhaulConfig::new);
 		CONFIG = serverSpecPair.getLeft();
 		CONFIG_SPEC = serverSpecPair.getRight();
 	}
 	
-	public static void loadConfig(ForgeConfigSpec config, String path) {
+	public static void loadConfig(ModConfigSpec config, String path) {
 		final CommentedFileConfig file = CommentedFileConfig.builder(new File(path)).sync().autosave()
 				.writingMode(WritingMode.REPLACE).build();
 		file.load();
-		config.setConfig(file);
+		config.correct(file);
 	}
 
 	public static class CrossbowverhaulConfig {
@@ -42,20 +39,20 @@ public class COConfig {
 		private static final double defaultModCrossbowProjectileRange = 1.0D;
 		private static final double defaultModNetheriteCrossbowProjectileRange = 1.5D;
 		
-		public final ConfigValue<Boolean> coEnchCrossbow;
-		public final ConfigValue<Boolean> coEnchNetheriteCrossbow;
-		public final ConfigValue<Boolean> coAllowExplosiveBoltsOnNormalCrossbow;
-		public final ConfigValue<Integer> coModMultishot;
-		public final ConfigValue<Integer> coCrossbowDurability;
-		public final ConfigValue<Integer> coNetheriteCrossbowDurability;
-		public final ConfigValue<Integer> coModCrossbowChargeTime;
-		public final ConfigValue<Integer> coModNetheriteCrossbowChargeTime;
-		public final ConfigValue<Double> coModCrossbowProjectileSpeed;
-		public final ConfigValue<Double> coModCrossbowProjectileRange;
-		public final ConfigValue<Double> coModNetheriteCrossbowProjectileSpeed;
-		public final ConfigValue<Double> coModNetheriteCrossbowProjectileRange;
+		public final ModConfigSpec.BooleanValue coEnchCrossbow;
+		public final ModConfigSpec.BooleanValue coEnchNetheriteCrossbow;
+		public final ModConfigSpec.BooleanValue coAllowExplosiveBoltsOnNormalCrossbow;
+		public final ModConfigSpec.IntValue coModMultishot;
+		public final ModConfigSpec.IntValue coCrossbowDurability;
+		public final ModConfigSpec.IntValue coNetheriteCrossbowDurability;
+		public final ModConfigSpec.IntValue coModCrossbowChargeTime;
+		public final ModConfigSpec.IntValue coModNetheriteCrossbowChargeTime;
+		public final ModConfigSpec.DoubleValue coModCrossbowProjectileSpeed;
+		public final ModConfigSpec.DoubleValue coModCrossbowProjectileRange;
+		public final ModConfigSpec.DoubleValue coModNetheriteCrossbowProjectileSpeed;
+		public final ModConfigSpec.DoubleValue coModNetheriteCrossbowProjectileRange;
 		
-		CrossbowverhaulConfig(final ForgeConfigSpec.Builder BUILDER) {
+		CrossbowverhaulConfig(final ModConfigSpec.Builder BUILDER) {
 			BUILDER.push("co-item");
 			
 				BUILDER.push("requires-game-restart");
