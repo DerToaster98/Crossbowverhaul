@@ -7,9 +7,11 @@ import de.dertoaster.crossbowverhaul.init.ModItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -93,7 +95,12 @@ public class ProjectileBolt extends AbstractArrow {
 		}
 		return ItemStack.EMPTY;
 	}
-	
+
+	@Override
+	protected ItemStack getDefaultPickupItem() {
+		return this.getPickupItem();
+	}
+
 	@Nullable
 	public Tier getTier() {
 		final int tierIdx = this.getSynchedTierID();
@@ -127,11 +134,12 @@ public class ProjectileBolt extends AbstractArrow {
 		
 		super.setBaseDamage(newValue + addDmg);
 	}
-	
+
+
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(ID_TIER, 2);
+	protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
+		super.defineSynchedData(pBuilder);
+		pBuilder.define(ID_TIER, 2);
 	}
 	
 	@Override
@@ -147,12 +155,11 @@ public class ProjectileBolt extends AbstractArrow {
 		this.setTier(Tiers.valueOf(nbt.getString("bolt_tier")));
 	}
 	
-	//Why tf do i need this?!
 	@Override
-	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+	public Packet<ClientGamePacketListener> getAddEntityPacket(ServerEntity pEntity) {
+		return new ClientboundAddEntityPacket(this, pEntity);
 	}
-	
+
 	@Override
 	protected void onHitEntity(EntityHitResult pResult) {
 		Entity ent = pResult.getEntity();

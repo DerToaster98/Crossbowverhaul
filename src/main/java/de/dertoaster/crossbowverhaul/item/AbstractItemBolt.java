@@ -39,15 +39,15 @@ public abstract class AbstractItemBolt extends ArrowItem implements IRegistryNam
 	public Tier getTier() {
 		return this.tier;
 	}
-	
+
 	@Override
-	public void appendHoverText(ItemStack p_77624_1_, Level p_77624_2_, List<Component> tooltip, TooltipFlag p_77624_4_) {
-		super.appendHoverText(p_77624_1_, p_77624_2_, tooltip, p_77624_4_);
+	public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
+		super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
 		if (GLFW.glfwGetKey(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_LEFT_SHIFT) != GLFW.GLFW_PRESS) {
-			tooltip.add(Component.translatable("item." + this.getRegistryName().getNamespace() + ".tooltip.hold_shift"));
+			pTooltipComponents.add(Component.translatable("item." + this.getRegistryName().getNamespace() + ".tooltip.hold_shift"));
 		} else {
-			tooltip.add(Component.translatable("item." + this.getRegistryName().getNamespace() + ".boltdamagetooltip", ProjectileBolt.getAdditionalDamageOf(this.getTier())));
-			tooltip.add(Component.translatable("item." + this.getRegistryName().getNamespace() + "." + this.getRegistryName().getPath() + ".tooltip"));
+			pTooltipComponents.add(Component.translatable("item." + this.getRegistryName().getNamespace() + ".boltdamagetooltip", ProjectileBolt.getAdditionalDamageOf(this.getTier())));
+			pTooltipComponents.add(Component.translatable("item." + this.getRegistryName().getNamespace() + "." + this.getRegistryName().getPath() + ".tooltip"));
 		}
 	}
 	
