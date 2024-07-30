@@ -6,13 +6,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.LootTableReference;
-import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.LootTableLoadEvent;
 
-@Mod.EventBusSubscriber(modid = CrossbowverhaulMod.MODID, bus = Bus.FORGE)
+@EventBusSubscriber(modid = CrossbowverhaulMod.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class EventHandlerForge {
 	
 	@SubscribeEvent
@@ -46,7 +44,7 @@ public class EventHandlerForge {
 						)
 					)
 				); 
-			for(LootPool pool : ((AccessorLootTable)lt).getPools()) {
+			for(LootPool pool : lt.getPools()) {
 				((AccessorLootTableBuilder)builder).getPools().add(pool);
 			}
 			event.setTable(
