@@ -16,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Vanishable;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 public class ItemCrossbow extends CrossbowItem implements Vanishable, IModifiedCrossbowMethod {
 
@@ -53,7 +54,7 @@ public class ItemCrossbow extends CrossbowItem implements Vanishable, IModifiedC
 		int i = this.getUseDuration(weaponItem) - useDuration;
 		float f = CrossbowItem.getPowerForTime(i, weaponItem);
 		if (f >= 1.0F && !CrossbowItem.isCharged(weaponItem) && this.tryLoadProjectiles(shooter, weaponItem)) {
-			CrossbowItem.setCharged(weaponItem, true);
+			CrossbowItem.tryLoadProjectiles(weaponItem, true);
 			SoundSource soundcategory = shooter instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE;
 			world.playSound((Player) null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.CROSSBOW_LOADING_END, soundcategory, 1.0F, 1.0F / (shooter.getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F);
 		}
@@ -170,5 +171,9 @@ public class ItemCrossbow extends CrossbowItem implements Vanishable, IModifiedC
 	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
 		return this.parentClassIsBookEnchantable(stack, book) && COConfig.CONFIG.coEnchCrossbow.get().booleanValue();
 	}
-	
+
+	@Override
+	public ItemStack getDefaultCreativeAmmo(@Nullable Player player, ItemStack projectileWeaponItem) {
+		return ModItems.ITEM_BOLT_IRON.get().getDefaultInstance();
+	}
 }

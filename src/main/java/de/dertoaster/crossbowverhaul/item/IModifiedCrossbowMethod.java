@@ -2,6 +2,8 @@ package de.dertoaster.crossbowverhaul.item;
 
 import java.util.List;
 
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.ChargedProjectiles;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -47,13 +49,16 @@ public interface IModifiedCrossbowMethod {
 	}
 
 	public default void modifiedPerformShooting(Level world, LivingEntity shooter, InteractionHand handUsed, ItemStack crossbow, float speed, float divergence) {
-		List<ItemStack> list = CrossbowItem.getChargedProjectiles(crossbow);
-		final int msLevel = (list.size() - 1) / 2;
+		//List<ItemStack> list = CrossbowItem.getChargedProjectiles(crossbow);
+		ChargedProjectiles cprj = crossbow.getOrDefault(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY);
+
+		final int msLevel = (cprj.getItems().size() - 1) / 2;
 		final boolean creativeModeFlag = shooter instanceof Player && ((Player) shooter).getAbilities().instabuild;
 
-		if(list.isEmpty()) {
-			list.add(new ItemStack(ModItems.ITEM_BOLT_IRON.get(), 1));
-		}
+		// Why?
+		/*if(cprj.isEmpty()) {
+			cprj.add(new ItemStack(ModItems.ITEM_BOLT_IRON.get(), 1));
+		}*/
 		
 		if (msLevel <= 0) {
 			CrossbowItem.shootProjectile(world, shooter, handUsed, crossbow, list.get(0), 1.0F, creativeModeFlag, speed, divergence, 0.0F);
@@ -67,8 +72,8 @@ public interface IModifiedCrossbowMethod {
 			final float anglePerIteration = this.getMultiShotAngle() / ((float) msLevel); // Divide by the multishot level:
 			float currentAngle = -this.getMultiShotAngle();
 
-			for (int i = 0; i < list.size(); ++i) {
-				ItemStack itemstack = list.get(i);
+			for (int i = 0; i < cprj.getItems().size(); ++i) {
+				ItemStack itemstack = cprj.getItems().get(i);
 
 				if (!itemstack.isEmpty()) {
 					CrossbowItem.shootProjectile(world, shooter, handUsed, crossbow, itemstack, afloat[i], creativeModeFlag, speed, divergence, currentAngle);
