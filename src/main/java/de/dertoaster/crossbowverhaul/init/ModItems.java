@@ -6,16 +6,11 @@ import de.dertoaster.crossbowverhaul.item.ItemBolt;
 import de.dertoaster.crossbowverhaul.item.ItemBoltExplosive;
 import de.dertoaster.crossbowverhaul.item.ItemCrossbow;
 import de.dertoaster.crossbowverhaul.item.ItemCrossbowNetherite;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Item.Properties;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Tiers;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
-
-import java.util.function.Supplier;
 
 public class ModItems {
 
