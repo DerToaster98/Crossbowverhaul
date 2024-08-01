@@ -4,6 +4,8 @@ import de.dertoaster.crossbowverhaul.init.ModEntityTypes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
+import net.minecraft.server.level.ServerEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -11,7 +13,6 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.Level.ExplosionInteraction;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.network.NetworkHooks;
 
 public class ProjectileBoltExplosive extends ProjectileBolt {
 
@@ -59,10 +60,10 @@ public class ProjectileBoltExplosive extends ProjectileBolt {
 		
 		this.remove(RemovalReason.KILLED);
 	}
-	
+
 	@Override
-	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
+	public Packet<ClientGamePacketListener> getAddEntityPacket(ServerEntity pEntity) {
+		return new ClientboundAddEntityPacket(this, pEntity);
 	}
 
 }
