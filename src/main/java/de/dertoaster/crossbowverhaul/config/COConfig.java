@@ -42,7 +42,6 @@ public class COConfig {
 		public final ModConfigSpec.BooleanValue coEnchCrossbow;
 		public final ModConfigSpec.BooleanValue coEnchNetheriteCrossbow;
 		public final ModConfigSpec.BooleanValue coAllowExplosiveBoltsOnNormalCrossbow;
-		public final ModConfigSpec.IntValue coModMultishot;
 		public final ModConfigSpec.IntValue coCrossbowDurability;
 		public final ModConfigSpec.IntValue coNetheriteCrossbowDurability;
 		public final ModConfigSpec.IntValue coModCrossbowChargeTime;
@@ -103,14 +102,6 @@ public class COConfig {
 						.comment("Multiplier for the projectile range for projectiles shot from the netherite crossbow")
 						.defineInRange("Netherite Crossbow projectile range multiplier", defaultModNetheriteCrossbowProjectileRange, 1.0F, Double.MAX_VALUE);
 				
-			BUILDER.pop();
-			
-			BUILDER.push("co-ench");
-			
-				coModMultishot = BUILDER
-						.comment("Maximum level of multishot. Resulting projctiles: (<value> * 2) + 1. For vanilla values, set it to 1")
-						.defineInRange("Modify multishot enchantment", defaultModifyMultiShotEnchantment, 1, Integer.MAX_VALUE);
-			
 			BUILDER.pop();
 		}
 	}
